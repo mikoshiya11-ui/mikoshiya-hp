@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mikoshiya11-ui.github.io/mikoshiya-hp/sitemap.xml
