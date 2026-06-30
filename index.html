@@ -255,6 +255,7 @@
   table.compare tr.highlight-row td{background:#fff6ef;}
 
   /* ---------- flow ---------- */
+  .flow-video{width:100%;max-width:900px;display:block;margin:0 auto 40px;border-radius:var(--radius);height:auto;}
   .flow{display:flex;align-items:flex-start;max-width:900px;margin:0 auto;flex-wrap:wrap;}
   .flow-step{flex:1;min-width:130px;text-align:center;}
   .step-1.reveal{transition-delay:0s;}
@@ -520,6 +521,9 @@
       <h2>導入の流れ</h2>
       <p>現状の帳票をお預かりして要件を整理し、無理のない範囲から段階的にデジタル化します。</p>
     </div>
+    <video class="flow-video reveal" autoplay muted loop playsinline poster="assets/img/flow.jpg">
+      <source src="assets/video/flow.mp4" type="video/mp4">
+    </video>
     <div class="flow">
       <div class="flow-step step-1 reveal">
         <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H8l-4 4V4z"/></svg></div>
