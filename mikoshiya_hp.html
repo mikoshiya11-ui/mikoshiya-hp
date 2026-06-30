@@ -255,7 +255,7 @@
   table.compare tr.highlight-row td{background:#fff6ef;}
 
   /* ---------- flow ---------- */
-  .flow{display:flex;justify-content:space-between;max-width:900px;margin:0 auto;gap:8px;flex-wrap:wrap;}
+  .flow{display:flex;align-items:flex-start;max-width:900px;margin:0 auto;flex-wrap:wrap;}
   .flow-step{flex:1;min-width:130px;text-align:center;}
   .flow-step.reveal:nth-child(1){transition-delay:0s;}
   .flow-step.reveal:nth-child(2){transition-delay:.12s;}
@@ -268,6 +268,17 @@
     margin:0 auto 12px;font-size:1.1rem;
   }
   .flow-step p{font-size:.82rem;color:var(--ink-soft);margin:0;font-weight:600;}
+  .flow-arrow{flex:0 0 34px;height:54px;display:flex;align-items:center;justify-content:center;}
+  .flow-arrow svg{width:26px;height:18px;display:block;animation:arrowSlide 1.6s ease-in-out infinite;}
+  .flow-arrow svg path{fill:var(--teal);}
+  @keyframes arrowSlide{
+    0%,100%{transform:translateX(0);opacity:.5;}
+    50%{transform:translateX(7px);opacity:1;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .flow-arrow svg{animation:none;opacity:1;}
+  }
+  @media (max-width:760px){.flow-arrow{display:none;}}
 
   /* ---------- about ---------- */
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1000px;margin:0 auto;align-items:start;}
@@ -492,9 +503,13 @@
     </div>
     <div class="flow">
       <div class="flow-step reveal"><div class="circle">1</div><p>無料相談<br>現状ヒアリング</p></div>
+      <div class="flow-arrow"><svg viewBox="0 0 24 16" xmlns="http://www.w3.org/2000/svg"><path d="M0 6h16v-4l8 6-8 6v-4H0z"/></svg></div>
       <div class="flow-step reveal"><div class="circle">2</div><p>対象工程・<br>帳票の整理</p></div>
+      <div class="flow-arrow"><svg viewBox="0 0 24 16" xmlns="http://www.w3.org/2000/svg"><path d="M0 6h16v-4l8 6-8 6v-4H0z"/></svg></div>
       <div class="flow-step reveal"><div class="circle">3</div><p>デモ画面の<br>作成・確認</p></div>
+      <div class="flow-arrow"><svg viewBox="0 0 24 16" xmlns="http://www.w3.org/2000/svg"><path d="M0 6h16v-4l8 6-8 6v-4H0z"/></svg></div>
       <div class="flow-step reveal"><div class="circle">4</div><p>本番導入・<br>運用開始</p></div>
+      <div class="flow-arrow"><svg viewBox="0 0 24 16" xmlns="http://www.w3.org/2000/svg"><path d="M0 6h16v-4l8 6-8 6v-4H0z"/></svg></div>
       <div class="flow-step reveal"><div class="circle">5</div><p>段階的な<br>機能拡張</p></div>
     </div>
   </div>
