@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MIKOSHIYA-iS ミコシヤ帳票一元管理システム（デモ版）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Yu Gothic","Meiryo","MS Gothic",sans-serif;background:#f4f1ea;color:#1a2332;min-height:100vh;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+.nav{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 20px;
+  background:rgba(10,18,30,.92);
+  backdrop-filter:blur(8px);
+  color:#fff;
+  box-shadow:0 2px 16px rgba(0,0,0,.35);
+  position:sticky;top:0;z-index:200;
+  border-bottom:1px solid rgba(212,175,55,.35);
+}
+.logo-lg{font-family:"Georgia",serif;font-size:41px;font-weight:900;color:#fff;line-height:1;letter-spacing:1px}
+.logo-lg span{color:#d4af37;animation:glow 2.4s ease-in-out infinite}
+@keyframes glow{0%,100%{text-shadow:0 0 4px rgba(212,175,55,.4)}50%{text-shadow:0 0 14px rgba(212,175,55,.9)}}
+.logo-sm{font-size:10px;font-weight:700;color:#d4af37;letter-spacing:2px;margin-top:2px}
+.nav-sep{width:1px;height:36px;background:rgba(212,175,55,.3);margin:0 6px}
+.nav-company{font-size:19px;font-weight:bold;letter-spacing:3px}
+.nav-ver{
+  margin-left:auto;
+  background:rgba(212,175,55,.12);border:1px solid #d4af37;
+  border-radius:14px;padding:3px 12px;font-size:15px;color:#d4af37;font-weight:bold
+}
+.nav-edit-btn{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.25);
+  border-radius:10px;padding:5px 13px;font-size:13px;color:#e0e0e0;
+  font-weight:bold;letter-spacing:.5px;white-space:nowrap;
+  transition:background .18s,border-color .18s;text-decoration:none;
+}
+.nav-edit-btn:hover{background:rgba(212,175,55,.18);border-color:#d4af37;color:#d4af37}
+
+.hero{
+  background:
+    linear-gradient(120deg,rgba(8,15,26,.88),rgba(10,21,37,.78),rgba(8,15,26,.88)),
+    url('assets/hero_bg.jpg') center 40% / cover no-repeat;
+  color:#fff;padding:34px 24px 24px;text-align:center;
+  border-bottom:1px solid rgba(212,175,55,.25);
+  min-height:300px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+@keyframes heroShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.hero h1{font-size:28px;letter-spacing:8px;font-weight:bold;margin-bottom:8px;color:#f5f0e6;animation:fadeUp .6s ease;text-shadow:0 2px 6px rgba(0,0,0,.5)}
+.hero p{font-size:17px;color:#c9b88a;letter-spacing:2px;animation:fadeUp .8s ease;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.intro-banner{
+  background:#fbf6e6;border-bottom:1px solid #e6dcc0;color:#5a4a25;
+  text-align:center;font-size:14px;line-height:1.8;padding:14px 20px;
+}
+.intro-banner b{color:#8a6b1a}
+
+.global-section{padding:20px 16px 48px;background:#ece6d8;box-shadow:0 1px 4px rgba(0,0,0,.06);border-bottom:1px solid #d8cdab}
+.global-label{font-size:15px;font-weight:bold;color:#7a6b45;letter-spacing:3px;margin-bottom:14px;text-align:center}
+.global-wrap{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+
+.flow-section{padding:26px 16px 12px;background:#fffdf8;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.flow-label{font-size:15px;font-weight:bold;color:#7a6b45;letter-spacing:3px;margin-bottom:16px;text-align:center}
+
+.flow-wrap{
+  display:flex;align-items:center;justify-content:center;
+  flex-wrap:nowrap;gap:0;overflow-x:auto;
+  padding:6px 0 16px;
+}
+
+.proc-box{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:130px;min-height:108px;
+  border-radius:10px;cursor:pointer;
+  border:2px solid rgba(255,255,255,.35);
+  box-shadow:0 4px 12px rgba(0,0,0,.18);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease,border-color .25s ease;
+  flex-shrink:0;padding:8px 4px;
+  position:relative;
+  animation:popIn .4s ease backwards;
+}
+.proc-box:hover{transform:translateY(-5px) scale(1.06);box-shadow:0 12px 26px rgba(0,0,0,.3);border-color:rgba(212,175,55,.6)}
+.proc-box:active{transform:translateY(-1px) scale(.97)}
+.proc-box.active{border-color:#d4af37;box-shadow:0 0 0 4px rgba(212,175,55,.35),0 10px 26px rgba(0,0,0,.3);animation:pulseActive 1.6s ease-in-out infinite}
+@keyframes pulseActive{0%,100%{box-shadow:0 0 0 4px rgba(212,175,55,.35),0 10px 26px rgba(0,0,0,.3)}50%{box-shadow:0 0 0 8px rgba(212,175,55,.18),0 10px 26px rgba(0,0,0,.3)}}
+@keyframes popIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+.proc-no{font-size:32px;font-weight:900;line-height:1}
+.proc-name{font-size:14px;font-weight:bold;margin-top:4px;text-align:center;line-height:1.3}
+.proc-count{
+  position:absolute;top:-6px;right:-6px;
+  background:#d4af37;color:#1a1205;
+  font-size:14px;font-weight:900;
+  border-radius:8px;padding:1px 6px;
+  min-width:18px;text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.3);
+}
+
+.arrow{
+  color:#c9b88a;font-size:27px;flex-shrink:0;margin:0 4px;
+  display:flex;align-items:center;padding-bottom:8px;
+  animation:flowPulse 1.8s ease-in-out infinite;
+}
+@keyframes flowPulse{0%,100%{opacity:.5;transform:translateX(0)}50%{opacity:1;transform:translateX(3px)}}
+
+.c-nyubin    {background:linear-gradient(135deg,#7d8e98,#4a5b66);color:#fff}
+.c-yodan     {background:linear-gradient(135deg,#e8674a,#a8330f);color:#fff}
+.c-chuzou    {background:linear-gradient(135deg,#ff9c2e,#c2630a);color:#fff}
+.c-setdan    {background:linear-gradient(135deg,#ffc94d,#d99a0c);color:#241a04}
+.c-bari      {background:linear-gradient(135deg,#5cb85f,#256b2a);color:#fff}
+.c-koin      {background:linear-gradient(135deg,#3d8de0,#0e4e96);color:#fff}
+.c-gaikan    {background:linear-gradient(135deg,#26a698,#015449);color:#fff}
+.c-keijizume {background:linear-gradient(135deg,#647885,#33424c);color:#fff}
+.c-shukka-out{background:linear-gradient(135deg,#4a4a4a,#161616);color:#fff}
+.c-zumen     {background:linear-gradient(135deg,#7b53c9,#3a1670);color:#fff}
+.c-fmea      {background:linear-gradient(135deg,#d9534f,#7a1f1a);color:#fff}
+.c-kikaku    {background:linear-gradient(135deg,#8a6549,#4a3322);color:#fff}
+.c-koutei    {background:linear-gradient(135deg,#4f5fc9,#222d80);color:#fff}
+.c-hyoujun   {background:linear-gradient(135deg,#2cb9d6,#066b7d);color:#fff}
+.c-nippou    {background:linear-gradient(135deg,#3cb371,#155c33);color:#fff}
+
+.detail-panel{
+  display:none;
+  background:#fffdf8;
+  border-top:3px solid #d4af37;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+}
+.detail-panel.show{display:block;animation:slideDown .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+
+.panel-inner{max-width:960px;margin:0 auto;padding:20px 22px}
+
+.panel-header{
+  display:flex;align-items:center;gap:14px;
+  padding-bottom:14px;border-bottom:1px solid #e6dcc0;margin-bottom:16px
+}
+.panel-badge{
+  width:74px;height:74px;border-radius:14px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:36px;font-weight:900;flex-shrink:0;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);
+  animation:popIn .4s ease;
+}
+.panel-title{font-size:24px;font-weight:bold;color:#16314f}
+.panel-sub{font-size:15px;color:#8a7a52;margin-top:3px}
+
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+@media(max-width:700px){.doc-grid{grid-template-columns:1fr}}
+
+.doc-section h3{
+  font-size:15px;font-weight:bold;color:#8a7a52;
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:9px;display:flex;align-items:center;gap:6px
+}
+.doc-section h3::after{content:'';flex:1;height:1px;background:#e6dcc0}
+
+.doc-link{
+  display:flex;align-items:center;gap:9px;
+  padding:9px 11px;border-radius:8px;margin-bottom:6px;
+  border:1px solid #e6dcc0;
+  background:#fbf9f2;
+  cursor:pointer;
+  transition:all .18s cubic-bezier(.34,1.56,.64,1);
+  font-size:16px;line-height:1.3;
+  opacity:0;animation:slideIn .35s ease forwards;
+}
+@keyframes slideIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+.doc-link:hover{background:#fbf3da;border-color:#d4af37;transform:translateX(4px) scale(1.02);box-shadow:0 4px 10px rgba(0,0,0,.1)}
+.doc-link:active{background:#f3e6bd;transform:scale(.98)}
+.doc-icon{font-size:22px;flex-shrink:0}
+.doc-name{font-weight:bold;color:#1a2332}
+.doc-code{font-size:13px;color:#a89568;margin-top:1px}
+
+.footer{
+  text-align:center;padding:22px;font-size:14px;color:#a89568;
+  border-top:1px solid #e6dcc0;margin-top:20px;background:#fffdf8
+}
+.footer a{color:#8a6b1a;font-weight:bold}
+
+.empty-msg{text-align:center;padding:24px;color:#c9b88a;font-size:18px}
+
+/* ─── 上位帳票／依頼書 の2グループ並び ─── */
+.global-row{display:flex;align-items:flex-start;justify-content:center;gap:32px;flex-wrap:wrap}
+.global-group{display:flex;flex-direction:column;align-items:center}
+.global-divider{width:1px;align-self:stretch;background:linear-gradient(180deg,transparent,#d8cdab 15%,#d8cdab 85%,transparent);margin-top:4px}
+
+.c-irai{background:linear-gradient(135deg,#8e1537,#c2185b);color:#fff}
+
+/* ─── ダークテーマ ─── */
+body{background:#2b2f38;color:#e2e2e2;font-family:'Noto Sans JP',sans-serif}
+
+.global-section{
+  background:#33373f;
+  background-image:
+    linear-gradient(rgba(212,175,55,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(212,175,55,.04) 1px,transparent 1px);
+  background-size:28px 28px;
+  border-bottom:1px solid #3e424a;
+  box-shadow:none;
+  padding-bottom:48px;
+}
+.global-label{color:#c9b88a}
+.global-section .proc-box{min-height:120px}
+
+.flow-section{background:#2b2f38;box-shadow:none}
+.flow-label{color:#c9b88a}
+
+.detail-panel{background:#33373f;border-top:3px solid #d4af37}
+.panel-header{border-bottom:1px solid #3e424a}
+.panel-title{color:#e8e8e8}
+.panel-sub{color:#8a9aaa}
+
+.doc-section h3{color:#a89568}
+.doc-section h3::after{background:#3e424a}
+
+.doc-link{background:#3a3e48;border:1px solid #454950}
+.doc-link:hover{background:#454a58;border-color:#d4af37}
+.doc-link:active{background:#3e4352}
+.doc-name{color:#e8e8e8}
+.doc-code{color:#8a96a0}
+
+.check-group-title{background:#3a3e48;color:#c9b88a}
+.empty-msg{color:#6a7a8a}
+
+.intro-banner{background:#3a3220;border-bottom:1px solid #4a3f28;color:#e0c98a}
+.intro-banner b{color:#f0d98a}
+
+.footer{background:#2b2f38;border-top:1px solid #3e424a;color:#7a8a9a}
+.footer a{color:#d4af37}
+
+/* ─── ヒーロータイトル ─── */
+.hero h1{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:44px;
+  letter-spacing:12px;
+  font-weight:800;
+  margin-bottom:12px;
+  color:#fff;
+  text-shadow:0 2px 24px rgba(0,0,0,.7),0 0 80px rgba(212,175,55,.2);
+}
+.hero p{font-size:17px;letter-spacing:3px;color:#c9b88a}
+
+/* ─── 工程ボックス ─── */
+.proc-name-lg{
+  font-size:14px;font-weight:900;
+  text-align:center;line-height:1.4;
+  letter-spacing:.5px;
+}
+.flow-wrap{
+  max-width:1020px;
+  margin-left:auto;
+  margin-right:auto;
+  gap:6px;
+}
+.proc-box{
+  width:95px;
+  min-height:88px;
+}
+.arrow{
+  font-size:20px;
+  margin:0 1px;
+}
+
+/* ─── 承認進捗ステッパー ─── */
+.progress-summary{text-align:center;font-size:17px;color:#8a7a52;margin-bottom:16px;font-weight:bold;letter-spacing:.5px}
+.progress-stepper{display:flex;align-items:flex-start;justify-content:center;gap:0;margin:6px 0 22px;flex-wrap:wrap}
+.pstep{display:flex;flex-direction:column;align-items:center;width:128px;position:relative}
+.pstep-line{position:absolute;top:21px;right:50%;width:128px;height:2px;background:#e6dcc0;z-index:1}
+.pstep:first-child .pstep-line{display:none}
+.pstep.done .pstep-line,.pstep.active .pstep-line{background:#d4af37}
+.pstep-dot{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:900;border:2px solid #e6dcc0;background:#fff;color:#b8a578;z-index:2;
+  box-shadow:0 2px 6px rgba(0,0,0,.08);transition:all .3s ease}
+.pstep.done .pstep-dot{background:#d4af37;border-color:#d4af37;color:#1a1205}
+.pstep.active .pstep-dot{background:#16314f;border-color:#d4af37;color:#fff;
+  box-shadow:0 0 0 4px rgba(212,175,55,.3);animation:pulseStep 1.6s ease-in-out infinite}
+@keyframes pulseStep{0%,100%{box-shadow:0 0 0 4px rgba(212,175,55,.3)}50%{box-shadow:0 0 0 9px rgba(212,175,55,.12)}}
+.pstep-label{font-size:14px;margin-top:7px;color:#a89568;font-weight:bold;text-align:center;line-height:1.3}
+.pstep.done .pstep-label{color:#8a7a52}
+.pstep.active .pstep-label{color:#16314f}
+
+/* ── フロー 左→右 順番グロー ── */
+.proc-box.flow-glow:not(.active){
+  border-color:rgba(212,175,55,.9)!important;
+  box-shadow:0 0 0 4px rgba(212,175,55,.45),0 10px 28px rgba(0,0,0,.35)!important;
+}
+
+/* ── CTA フッター ── */
+.cta{
+  max-width:720px;margin:0 auto;padding:28px 20px;text-align:center;
+}
+.cta h2{font-size:19px;color:#f0d98a;letter-spacing:2px;margin-bottom:10px}
+.cta p{font-size:14px;color:#c9b88a;line-height:1.8;margin-bottom:16px}
+.cta a.btn-contact{
+  display:inline-block;background:#d4af37;color:#1a1205;font-weight:900;
+  padding:10px 28px;border-radius:24px;font-size:14px;letter-spacing:1px;
+  transition:background .18s,transform .18s;
+}
+.cta a.btn-contact:hover{background:#e8c359;transform:translateY(-2px)}
+</style>
+</head>
+<body>
+
+<!-- ナビバー -->
+<nav class="nav">
+  <div>
+    <div class="logo-lg">MIKOSHIYA-<span>i</span>S</div>
+    <div class="logo-sm">MIKOSHIYA Integrated System</div>
+  </div>
+  <div class="nav-sep"></div>
+  <span class="nav-company">サンプル製造株式会社</span>
+  <span class="nav-ver">帳票一元管理システム（デモ版）</span>
+  <a href="mailto:mikoshiya11@gmail.com?subject=MIKOSHIYA-iS%20資料請求" class="nav-edit-btn">✉️ 資料請求・お問い合わせ</a>
+</nav>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <h1>帳票一元管理システム</h1>
+  <p>工程をクリックして関連帳票を開く</p>
+</div>
+
+<div class="intro-banner">
+  本デモは、<b>愛知県内のアルミ鋳造メーカー様</b>で実際に稼働しているシステムをベースにした他社様向けご紹介版です。<br>
+  工程名・帳票の種類・配色・承認ルートは、<b>貴社の運用に合わせてそのままカスタマイズ</b>してご提供します。
+</div>
+
+<!-- 上位帳票（工程に依存しない・ライン全体共通）＋ 依頼書 -->
+<div class="global-section">
+  <div class="global-row">
+
+    <div class="global-group">
+      <div class="global-label">■ 上 位 帳 票 （ ラ イ ン 全 体 共 通 ）</div>
+      <div class="global-wrap">
+
+        <div class="proc-box c-zumen" onclick="showGlobal('zumen')" id="box-g-zumen">
+          <span class="proc-no">📐</span>
+          <span class="proc-name">図　面</span>
+        </div>
+
+        <div class="proc-box c-fmea" onclick="showGlobal('fmea')" id="box-g-fmea">
+          <span class="proc-no">⚠️</span>
+          <span class="proc-name">工程FMEA</span>
+        </div>
+
+        <div class="proc-box c-kikaku" onclick="showGlobal('kikaku')" id="box-g-kikaku">
+          <span class="proc-no">📏</span>
+          <span class="proc-name">検査規格書</span>
+        </div>
+
+        <div class="proc-box c-koutei" onclick="showGlobal('koutei')" id="box-g-koutei">
+          <span class="proc-no">📈</span>
+          <span class="proc-name">工程設計<br>関連</span>
+        </div>
+
+        <div class="proc-box c-hyoujun" onclick="showGlobal('hyoujun')" id="box-g-hyoujun">
+          <span class="proc-no">📋</span>
+          <span class="proc-name">標準作業<br>3点セット</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="global-divider"></div>
+
+    <div class="global-group">
+      <div class="global-label">■ 依 頼 書</div>
+      <div class="global-wrap">
+
+        <div class="proc-box c-irai" onclick="showIrai('koteihenkou')" id="box-i-koteihenkou">
+          <span class="proc-no">🛠</span>
+          <span class="proc-name">工程変更<br>依頼書<br><span style="font-size:11px;color:#d4af37;font-weight:900">（サンプル）</span></span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="global-divider"></div>
+
+    <div class="global-group">
+      <div class="global-label">■ 報 告 書</div>
+      <div class="global-wrap">
+
+        <div class="proc-box c-nippou" onclick="showGlobal('nippou')" id="box-g-nippou">
+          <span class="proc-no">📅</span>
+          <span class="proc-name">日　報</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 工程フロー -->
+<div class="flow-section">
+  <div class="flow-label">■ 製　造　工　程　フ　ロ　ー（ 導 入 事 例 ）</div>
+  <div class="flow-wrap">
+
+    <div class="proc-box c-nyubin" onclick="showDetail('nyubin')" id="box-nyubin">
+      <span class="proc-name-lg">材料受入</span>
+    </div>
+<div class="proc-box c-yodan" onclick="showDetail('yodan')" id="box-yodan">
+      <span class="proc-name-lg">溶解</span>
+    </div>
+<div class="proc-box c-chuzou" onclick="showDetail('chuzou')" id="box-chuzou">
+      <span class="proc-name-lg">鋳造</span>
+    </div>
+<div class="proc-box c-setdan" onclick="showDetail('setdan')" id="box-setdan">
+      <span class="proc-name-lg">堰切断</span>
+    </div>
+<div class="proc-box c-bari" onclick="showDetail('bari')" id="box-bari">
+      <span class="proc-name-lg">刻印座<br>フライス</span>
+    </div>
+<div class="proc-box c-koin" onclick="showDetail('koin')" id="box-koin">
+      <span class="proc-name-lg">刻印</span>
+    </div>
+<div class="proc-box c-gaikan" onclick="showDetail('gaikan')" id="box-gaikan">
+      <span class="proc-name-lg">外観検査</span>
+    </div>
+<div class="proc-box c-keijizume" onclick="showDetail('keijizume')" id="box-keijizume">
+      <span class="proc-name-lg">パレット<br>詰め</span>
+    </div>
+<div class="proc-box c-shukka-out" onclick="showDetail('shukkaout')" id="box-shukkaout">
+      <span class="proc-name-lg">出荷</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- 詳細パネル -->
+<div class="detail-panel" id="detail-panel">
+  <div class="panel-inner" id="panel-content"></div>
+</div>
+
+<div class="cta">
+  <h2>貴社の帳票も、同じ仕組みで一元管理できます</h2>
+  <p>工程・帳票・承認ルートは業種を問わず入れ替え可能です。まずは貴社の帳票の現状をお聞かせください。導入事例のご紹介や、貴社向けデモのご相談も承っております。</p>
+  <a class="btn-contact" href="mailto:mikoshiya11@gmail.com?subject=MIKOSHIYA-iS%20導入相談">✉️ 導入について相談する</a>
+</div>
+
+<div class="footer">
+  MIKOSHIYA-iS　ミコシヤ帳票一元管理システム（デモ版）　©2026　｜　お問い合わせ：<a href="mailto:mikoshiya11@gmail.com">mikoshiya11@gmail.com</a>
+</div>
+
+<script>
+// ─── サンプルリンク先（カテゴリ共通） ───
+const SAMPLE_QC    = 'sample/qc_sample.html';
+const SAMPLE_SOP   = 'sample/sop_sample.html';
+const SAMPLE_CHECK = 'sample/checksheet_sample.html';
+const SAMPLE_IRAI  = 'sample/irai_sample.html';
+
+// ─── 上位帳票（工程に依存しない・ライン全体共通） ───
+const GLOBAL_DOCS = {
+  zumen: {
+    icon:'📐', name:'図面', colorClass:'c-zumen',
+    items:[
+      {name:'製品図面（サンプル）', file: SAMPLE_QC},
+    ],
+  },
+  fmea: {
+    icon:'⚠️', name:'工程FMEA', colorClass:'c-fmea',
+    items:[
+      {name:'工程FMEA（サンプル）', file: SAMPLE_QC},
+    ],
+  },
+  kikaku: {
+    icon:'📏', name:'検査規格書', colorClass:'c-kikaku',
+    items:[
+      {name:'検査規格書（サンプル）', file: SAMPLE_QC},
+    ],
+  },
+  koutei: {
+    icon:'📈', name:'工程設計関連', colorClass:'c-koutei',
+    items:[
+      {name:'工程設計総括表（サンプル）', file: SAMPLE_QC},
+      {name:'工程概要書（サンプル）', file: SAMPLE_QC},
+    ],
+  },
+  hyoujun: {
+    icon:'📋', name:'標準作業3点セット', colorClass:'c-hyoujun',
+    items:[
+      {name:'標準作業3点セット（サンプル）', file: SAMPLE_SOP},
+    ],
+  },
+  nippou: {
+    icon:'📅', name:'日報', colorClass:'c-nippou',
+    items:[
+      {name:'日報（サンプル）', file: SAMPLE_CHECK},
+    ],
+  },
+};
+
+// ─── 製造工程フロー（導入事例：アルミ鋳造ラインをベースにしたサンプル） ───
+const PROCS = {
+  nyubin: {
+    no:'受入', name:'材料受入', colorClass:'c-nyubin',
+    qc:[{name:'QC工程表（サンプル）', file: SAMPLE_QC}],
+    sops:[],
+    checks:[],
+  },
+  yodan: {
+    no:'①', name:'溶解', colorClass:'c-yodan',
+    qc:[{name:'QC工程表（サンプル）', file: SAMPLE_QC}],
+    sops:[
+      {name:'材料投入要領書（サンプル）', file: SAMPLE_SOP},
+      {name:'撹拌作業要領書（サンプル）', file: SAMPLE_SOP},
+      {name:'立上・立下要領書（サンプル）', file: SAMPLE_SOP},
+    ],
+    checks:[
+      {name:'設備日常点検チェックシート（サンプル）', html: SAMPLE_CHECK},
+      {name:'材料投入記録表（サンプル）', html: SAMPLE_CHECK},
+    ],
+  },
+  chuzou: {
+    no:'②', name:'鋳造', colorClass:'c-chuzou',
+    qc:[{name:'QC工程表（サンプル）', file: SAMPLE_QC}],
+    sops:[
+      {name:'鋳造作業要領書（サンプル）', file: SAMPLE_SOP},
+      {name:'型予熱要領書（サンプル）', file: SAMPLE_SOP},
+      {name:'異常処置作業要領書（サンプル）', file: SAMPLE_SOP},
+      {name:'設備立ち上げ・立ち下げ要領書（サンプル）', file: SAMPLE_SOP},
+    ],
+    checks:[
+      {name:'設備点検チェックシート（サンプル）', html: SAMPLE_CHECK},
+      {name:'金型保全点検記録表（サンプル）', html: SAMPLE_CHECK},
+      {name:'設備定期点検計画実績表（サンプル）', html: SAMPLE_CHECK},
+    ],
+  },
+  setdan: {
+    no:'③', name:'堰切断', colorClass:'c-setdan',
+    qc:[{name:'QC工程表（サンプル）', file: SAMPLE_QC}],
+    sops:[{name:'刃具交換要領書（サンプル）', file: SAMPLE_SOP}],
+    checks:[],
+  },
+  bari: {
+    no:'④', name:'刻印座フライス', colorClass:'c-bari',
+    qc:[{name:'QC工程表（サンプル）', file: SAMPLE_QC}],
+    sops:[],
+    checks:[],
+  },
+  koin: {
+    no:'⑤', name:'刻印', colorClass:'c-koin',
+    qc:[{name:'QC工程表（サンプル）', file: SAMPLE_QC}],
+    sops:[
+      {name:'自動起動要領書（サンプル）', file: SAMPLE_SOP},
+      {name:'金型設定要領書（サンプル）', file: SAMPLE_SOP},
+    ],
+    checks:[],
+  },
+  gaikan: {
+    no:'⑥', name:'外観検査', colorClass:'c-gaikan',
+    qc:[{name:'QC工程表（サンプル）', file: SAMPLE_QC}],
+    sops:[{name:'外観検査要領書（サンプル）', file: SAMPLE_SOP}],
+    checks:[
+      {name:'初物チェックシート（サンプル）', html: SAMPLE_CHECK},
+    ],
+  },
+  keijizume: {
+    no:'⑦', name:'パレット詰め', colorClass:'c-keijizume',
+    qc:[],
+    sops:[{name:'箱詰め作業要領書（サンプル）', file: SAMPLE_SOP}],
+    checks:[],
+  },
+  shukkaout: {
+    no:'出荷', name:'出 荷', colorClass:'c-shukka-out',
+    qc:[{name:'QC工程表（サンプル）', file: SAMPLE_QC}],
+    sops:[],
+    checks:[],
+  },
+};
+
+let currentProc = null;
+let currentGlobal = null;
+let currentIrai = null;
+
+// ─── 依頼書（サンプル）───
+const IRAI_DOCS = {
+  koteihenkou: {
+    icon:'🛠', name:'工程変更依頼書（サンプル）', colorClass:'c-irai', code:'SAMPLE-IRAI-001',
+    file: SAMPLE_IRAI,
+    steps:['Ⅰ発行部署','Ⅱ担当部署','Ⅲ品質管理','Ⅳ製造'],
+    current: 2
+  },
+};
+
+function renderProgress(d) {
+  const stepsHtml = d.steps.map((s, i) => {
+    let cls = 'pstep';
+    if (i < d.current) cls += ' done';
+    else if (i === d.current) cls += ' active';
+    const mark = i < d.current ? '✓' : (i + 1);
+    return `<div class="${cls}">
+      <div class="pstep-line"></div>
+      <div class="pstep-dot">${mark}</div>
+      <div class="pstep-label">${s}</div>
+    </div>`;
+  }).join('');
+  const statusText = d.current >= d.steps.length - 1
+    ? '✅ 全部署の承認が完了しています'
+    : `📍 現在「${d.steps[d.current]}」で承認待ちです`;
+  return `<div class="progress-summary">${statusText}</div><div class="progress-stepper">${stepsHtml}</div>`;
+}
+
+function showIrai(key) {
+  if (currentIrai === key) { closePanel(); return; }
+
+  currentGlobal = null;
+  currentProc = null;
+  currentIrai = key;
+  clearActiveBoxes();
+  document.getElementById('box-i-' + key).classList.add('active');
+
+  const d = IRAI_DOCS[key];
+  const panel = document.getElementById('detail-panel');
+  const content = document.getElementById('panel-content');
+
+  content.innerHTML = `
+    <div class="panel-header">
+      <div class="panel-badge ${d.colorClass}">${d.icon}</div>
+      <div>
+        <div class="panel-title">${d.name}</div>
+        <div class="panel-sub">${d.code}　／　承認進捗を可視化できます（回覧ルートは貴社仕様に合わせて設計）</div>
+      </div>
+    </div>
+    ${renderProgress(d)}
+    <div class="doc-grid">
+      <div class="doc-section"><h3>依頼書本体</h3>
+        <a class="doc-link" href="${d.file}" target="_blank">
+          <span class="doc-icon">📄</span>
+          <div><div class="doc-name">${d.name}</div></div>
+        </a>
+      </div>
+    </div>`;
+
+  panel.classList.add('show');
+  applyStagger();
+}
+
+
+function clearActiveBoxes() {
+  document.querySelectorAll('.proc-box').forEach(b => b.classList.remove('active'));
+}
+
+function renderDocLink(d) {
+  return `<a class="doc-link" href="${d.file}" target="_blank">
+    <span class="doc-icon">📄</span>
+    <div><div class="doc-name">${d.name}</div></div>
+  </a>`;
+}
+
+function renderCheck(d) {
+  return `<a class="doc-link" href="${d.html}" target="_blank">
+    <span class="doc-icon">📊</span>
+    <div><div class="doc-name">${d.name}</div></div>
+  </a>`;
+}
+
+function closePanel() {
+  document.getElementById('detail-panel').classList.remove('show');
+  clearActiveBoxes();
+  currentProc = null;
+  currentGlobal = null;
+  currentIrai = null;
+}
+
+function showDetail(key) {
+  if (currentProc === key) { closePanel(); return; }
+
+  currentGlobal = null;
+  currentProc = key;
+  clearActiveBoxes();
+  document.getElementById('box-' + key).classList.add('active');
+
+  const p = PROCS[key];
+  const panel = document.getElementById('detail-panel');
+  const content = document.getElementById('panel-content');
+
+  const qcHtml = p.qc.map(renderDocLink).join('') || '<div class="empty-msg">—</div>';
+  const sopHtml = p.sops.map(renderDocLink).join('') || '<div class="empty-msg">—</div>';
+  const checkHtml = p.checks.map(renderCheck).join('') || '<div class="empty-msg">—</div>';
+
+  content.innerHTML = `
+    <div class="panel-header">
+      <div class="panel-badge ${p.colorClass}">${p.no}</div>
+      <div>
+        <div class="panel-title">${p.name}</div>
+        <div class="panel-sub">関連帳票 ${p.qc.length + p.sops.length + p.checks.length} 件（サンプル）　／　図面・検査規格書は上段「上位帳票」を参照</div>
+      </div>
+    </div>
+    <div class="doc-grid">
+      <div class="doc-section"><h3>QC工程表</h3>${qcHtml}</div>
+      <div class="doc-section"><h3>作業要領書</h3>${sopHtml}</div>
+      <div class="doc-section"><h3>チェックシート</h3>${checkHtml}</div>
+    </div>`;
+
+  panel.classList.add('show');
+  applyStagger();
+}
+
+function showGlobal(key) {
+  if (currentGlobal === key) { closePanel(); return; }
+
+  currentProc = null;
+  currentGlobal = key;
+  clearActiveBoxes();
+  document.getElementById('box-g-' + key).classList.add('active');
+
+  const g = GLOBAL_DOCS[key];
+  const panel = document.getElementById('detail-panel');
+  const content = document.getElementById('panel-content');
+
+  const itemsHtml = g.items.map(renderDocLink).join('') || '<div class="empty-msg">—</div>';
+
+  content.innerHTML = `
+    <div class="panel-header">
+      <div class="panel-badge ${g.colorClass}">${g.icon}</div>
+      <div>
+        <div class="panel-title">${g.name}（上位帳票・ライン全体共通）</div>
+        <div class="panel-sub">関連帳票 ${g.items.length} 件（サンプル）　／　全工程に共通して適用される帳票です</div>
+      </div>
+    </div>
+    <div class="doc-grid">
+      <div class="doc-section"><h3>${g.name}</h3>${itemsHtml}</div>
+    </div>`;
+
+  panel.classList.add('show');
+  applyStagger();
+}
+
+// ─── doc-link の表示順にスタッガーディレイを付与（フェードイン演出）───
+function applyStagger(){
+  document.querySelectorAll('.doc-link').forEach((el,i)=>{
+    el.style.animationDelay = (i*0.04)+'s';
+  });
+}
+
+// ── 製造工程フロー 左→右 順番グロー ──
+(function(){
+  const STEP_MS  = 420;
+  const PAUSE_MS = 1800;
+  let timer = null;
+
+  function runFlow() {
+    const boxes = document.querySelectorAll('.flow-wrap .proc-box');
+    let i = 0;
+
+    function next() {
+      boxes.forEach(b => b.classList.remove('flow-glow'));
+      if (i < boxes.length) {
+        boxes[i].classList.add('flow-glow');
+        i++;
+        timer = setTimeout(next, STEP_MS);
+      } else {
+        timer = setTimeout(runFlow, PAUSE_MS);
+      }
+    }
+    next();
+  }
+
+  window.addEventListener('load', function(){
+    setTimeout(runFlow, 800);
+  });
+})();
+
+</script>
+</body>
+</html>

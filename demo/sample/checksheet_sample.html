@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>チェックシート（サンプル）／ MIKOSHIYA-iS</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Meiryo","MS Gothic",sans-serif;background:#f0f4f8;color:#1a2332;padding:0 0 40px}
+a{text-decoration:none;color:inherit}
+.nav{display:flex;align-items:center;gap:12px;padding:8px 16px;background:linear-gradient(135deg,#16314f,#2a5a8c);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.4);position:sticky;top:0;z-index:200}
+.nav a.back{font-size:12px;background:rgba(255,255,255,.15);padding:6px 12px;border-radius:6px}
+.nav a.back:hover{background:rgba(255,255,255,.28)}
+.nav-title{font-size:14px;font-weight:bold;letter-spacing:1px}
+.sample-banner{background:#fff6df;border-bottom:1px solid #e6c976;color:#7a5c00;font-size:12px;text-align:center;padding:8px 12px;font-weight:bold}
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 16px;background:#fff;border-bottom:1px solid #e0e7ef}
+.btn{font-size:12px;font-weight:bold;border:none;border-radius:6px;padding:8px 14px;cursor:pointer;background:#16314f;color:#fff;transition:background .15s}
+.btn:hover{background:#0f2338}
+.save-status{font-size:11px;color:#43a047;font-weight:bold;min-width:90px}
+.wrap{max-width:900px;margin:18px auto;padding:0 16px}
+.title-block{text-align:center;margin-bottom:14px}
+.title-block h1{font-size:17px;letter-spacing:1px}
+.title-block p{font-size:11px;color:#607d8b;margin-top:4px}
+.tbl-scroll{overflow-x:auto;background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+table{border-collapse:collapse;width:100%;font-size:12px}
+th,td{border:1px solid #dfe7ee;padding:5px 7px;text-align:center}
+th{background:#eef3f8;color:#37474f;font-weight:bold}
+.input-row input{width:100%;border:1px solid #dfe7ee;border-radius:4px;padding:4px 6px;font-size:11px;text-align:center}
+.add-row-bar{display:flex;justify-content:flex-end;padding:10px 0}
+.del-btn{cursor:pointer;color:#ef5350;font-weight:bold;font-size:13px}
+.del-btn:hover{color:#c62828}
+.footer{text-align:center;padding:20px;font-size:10px;color:#90a4ae}
+@media print{.nav,.toolbar,.sample-banner,.add-row-bar{display:none!important}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="back" href="../mikoshiya_is_demo.html">← MIKOSHIYA-iSへ戻る</a>
+  <span class="nav-title">日常点検チェックシート（サンプル）</span>
+</nav>
+<div class="sample-banner">✅ これはサンプル表示です。実データの入力・自動保存・CSV出力もお試しいただけます（貴社の項目に合わせてカスタマイズ可能）。</div>
+
+<div class="toolbar">
+  <span style="flex:1"></span>
+  <span class="save-status" id="saveStatus"></span>
+  <button class="btn" id="printBtn">🖨 印刷</button>
+  <button class="btn" id="csvBtn">⬇ CSV出力</button>
+</div>
+<div class="wrap">
+  <div class="title-block">
+    <h1>設備日常点検チェックシート（サンプル）</h1>
+    <p>「＋行を追加」で記録を追加し、各項目に入力してください（自動保存）</p>
+  </div>
+  <div class="tbl-scroll"><table id="logTable"></table></div>
+  <div class="add-row-bar"><button class="btn" id="addRowBtn">＋ 行を追加</button></div>
+</div>
+<script>
+const SCHEMA = { code:'SAMPLE-CS-01', name:'設備日常点検チェックシート（サンプル）', columns: [
+  {"key":"date","label":"点検日","type":"date"},
+  {"key":"item","label":"点検項目","type":"text"},
+  {"key":"result","label":"結果（OK/NG）","type":"text"},
+  {"key":"person","label":"点検者","type":"text"},
+  {"key":"note","label":"備考","type":"text"}
+]};
+const STORAGE_KEY = 'mikoshiya_demo_checksheet_' + SCHEMA.code + '_rows';
+function loadRows(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY))||[]; }catch(e){ return []; } }
+function saveRows(rows){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(rows));
+  const s=document.getElementById('saveStatus');
+  s.textContent='✓ 保存しました '+new Date().toLocaleTimeString('ja-JP');
+  setTimeout(function(){ if(s.textContent.indexOf('保存')>=0) s.textContent=''; },2500);
+}
+let rows = loadRows();
+if(rows.length===0){
+  rows = [
+    {date:'2026-07-10',item:'油圧圧力',result:'OK',person:'サンプル太郎',note:''},
+    {date:'2026-07-11',item:'油圧圧力',result:'OK',person:'サンプル太郎',note:''}
+  ];
+}
+function renderTable(){
+  let html='<thead><tr>';
+  SCHEMA.columns.forEach(function(c){ html+='<th>'+c.label+'</th>'; });
+  html+='<th>削除</th></tr></thead><tbody>';
+  rows.forEach(function(row,ri){
+    html+='<tr>';
+    SCHEMA.columns.forEach(function(c){
+      const v = row[c.key]!==undefined? row[c.key] : '';
+      html+='<td class="input-row"><input type="'+(c.type||'text')+'" data-ri="'+ri+'" data-key="'+c.key+'" value="'+String(v).replace(/"/g,'&quot;')+'"></td>';
+    });
+    html+='<td><span class="del-btn" data-ri="'+ri+'">✕</span></td></tr>';
+  });
+  html+='</tbody>';
+  document.getElementById('logTable').innerHTML=html;
+  document.querySelectorAll('#logTable input').forEach(function(inp){
+    inp.addEventListener('change',function(){
+      const ri=Number(inp.dataset.ri), key=inp.dataset.key;
+      rows[ri][key]=inp.value;
+      saveRows(rows);
+    });
+  });
+  document.querySelectorAll('.del-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      const ri=Number(btn.dataset.ri);
+      rows.splice(ri,1);
+      saveRows(rows);
+      renderTable();
+    });
+  });
+}
+document.getElementById('addRowBtn').addEventListener('click', function(){
+  const row={};
+  SCHEMA.columns.forEach(function(c){ row[c.key]=''; });
+  rows.push(row);
+  saveRows(rows);
+  renderTable();
+});
+document.getElementById('csvBtn').addEventListener('click', function(){
+  let head=SCHEMA.columns.map(function(c){return c.label;});
+  let csvRows=[head];
+  rows.forEach(function(row){ csvRows.push(SCHEMA.columns.map(function(c){return row[c.key]||'';})); });
+  const csv=csvRows.map(function(r){return r.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  const blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob), a=document.createElement('a');
+  a.href=url; a.download=SCHEMA.code+'.csv'; a.click(); URL.revokeObjectURL(url);
+});
+document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+renderTable();
+</script>
+
+<div class="footer">MIKOSHIYA-iS　サンプル帳票 — SAMPLE-CS-01</div>
+</body>
+</html>
