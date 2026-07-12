@@ -41,6 +41,16 @@ a{text-decoration:none;color:inherit}
 }
 .nav-edit-btn:hover{background:rgba(212,175,55,.18);border-color:#d4af37;color:#d4af37}
 
+@media (max-width:640px){
+  .nav{flex-wrap:wrap;gap:8px;padding:8px 14px}
+  .logo-lg{font-size:24px}
+  .logo-sm{font-size:8px}
+  .nav-sep{display:none}
+  .nav-company{display:none}
+  .nav-ver{margin-left:0;font-size:11px;padding:3px 9px;white-space:nowrap}
+  .nav-edit-btn{margin-left:auto;font-size:11px;padding:5px 9px;white-space:nowrap}
+}
+
 .hero{
   background:
     linear-gradient(120deg,rgba(8,15,26,.88),rgba(10,21,37,.78),rgba(8,15,26,.88)),
