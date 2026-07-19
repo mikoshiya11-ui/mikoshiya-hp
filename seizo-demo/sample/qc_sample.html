@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>QC工程表（サンプル）／ MIKOSHIYA-iS</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Meiryo','メイリオ',sans-serif;background:#f0f4f8;font-size:13px;color:#111;}
+.snap-header{background:linear-gradient(135deg,#16314f,#2a5a8c);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.3);}
+.snap-header .logo{font-size:10px;opacity:.7;}
+.snap-header .ttl{font-size:16px;font-weight:bold;letter-spacing:2px;}
+.snap-header .note{margin-left:auto;font-size:10px;opacity:.85;text-align:right;}
+.back{font-size:11px;background:rgba(255,255,255,.15);padding:6px 12px;border-radius:6px;color:#fff;text-decoration:none;}
+.back:hover{background:rgba(255,255,255,.28)}
+.sample-banner{background:#fff6df;border-bottom:1px solid #e6c976;color:#7a5c00;font-size:12px;text-align:center;padding:8px 12px;font-weight:bold;}
+.main{padding:14px;max-width:1100px;margin:0 auto;}
+.doc-title-bar{text-align:center;margin-bottom:8px;}
+.doc-title{font-size:20px;font-weight:bold;letter-spacing:6px;}
+.doc-subtitle{font-size:11px;color:#555;margin-top:2px;}
+.table-wrap{background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.1);margin-bottom:10px;}
+.table-scroll{overflow-x:auto;padding:8px;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid #999;font-size:10px;padding:3px 5px;text-align:center;}
+th{background:#16314f;color:#fff;}
+.info-tbl td{background:#e8edf2;font-weight:bold;}
+.info-tbl td.val{background:#fff;font-weight:normal;}
+.print-btn-bar{text-align:right;padding:6px 0;}
+.print-btn-bar button{padding:5px 14px;border-radius:4px;border:1px solid #16314f;background:#16314f;color:#fff;font-size:11px;cursor:pointer;font-family:inherit;}
+.footer-note{text-align:right;font-size:10px;color:#888;margin-top:8px;}
+@media print{ .snap-header,.print-btn-bar,.sample-banner{display:none!important;} .main{padding:0;} }
+</style>
+</head>
+<body>
+<header class="snap-header">
+  <a class="back" href="../mikoshiya_is_demo.html">← MIKOSHIYA-iSへ戻る</a>
+  <div>
+    <div class="logo">MIKOSHIYA-iS サンプル</div>
+    <div class="ttl">QC工程表（サンプル帳票）</div>
+  </div>
+  <div class="note">閲覧用サンプル</div>
+</header>
+<div class="sample-banner">📄 これはサンプル表示です。実際の導入時は貴社の帳票フォーマット・項目・数値をそのまま再現します。</div>
+
+<div class="main">
+  <div class="print-btn-bar"><button onclick="window.print()">🖨 印刷</button></div>
+  <div class="doc-title-bar">
+    <div class="doc-title">Ｑ Ｃ 工 程 表</div>
+    <div class="doc-subtitle">※品番・管理項目・数値はすべてサンプルです</div>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table-scroll">
+      <table class="info-tbl">
+        <tr>
+          <td>加工部署</td><td class="val">製造課</td>
+          <td>品　番</td><td class="val">SAMPLE-000-01</td>
+          <td>品　名</td><td class="val">サンプル製品A</td>
+          <td>作成年月日</td><td class="val">2026-01-10</td>
+        </tr>
+      </table>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>工程No.</th><th>工程名</th><th>使用設備</th><th>管理項目</th>
+            <th>規格（結果系）</th><th>管理水準</th><th>測定具・方法</th>
+            <th>サンプリング</th><th>頻度</th><th>チェックシート名</th><th>作業要領書名</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td><td>受入検査</td><td>検査機</td><td>外観・寸法</td>
+            <td>図面規格内</td><td>-</td><td>ノギス</td>
+            <td>全数</td><td>毎ロット</td><td>受入チェックシート（サンプル）</td><td>受入検査要領書（サンプル）</td>
+          </tr>
+          <tr>
+            <td>2</td><td>一次加工</td><td>加工設備A</td><td>寸法・温度</td>
+            <td>規格値内</td><td>±0.05</td><td>専用治具</td>
+            <td>1/ロット</td><td>毎ロット</td><td>加工チェックシート（サンプル）</td><td>一次加工作業要領書（サンプル）</td>
+          </tr>
+          <tr>
+            <td>3</td><td>最終検査</td><td>検査台</td><td>外観・機能</td>
+            <td>良品基準内</td><td>-</td><td>目視・治具</td>
+            <td>全数</td><td>毎ロット</td><td>最終検査チェックシート（サンプル）</td><td>最終検査要領書（サンプル）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer-note">MIKOSHIYA-iS　サンプル帳票　帳票NO: SAMPLE-QC-01</div>
+</div>
+</body>
+</html>

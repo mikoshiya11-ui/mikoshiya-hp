@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>作業要領書（サンプル）／ MIKOSHIYA-iS</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Yu Gothic","Meiryo",sans-serif;background:#f4f1ea;color:#1a2332;padding-bottom:40px}
+a{text-decoration:none}
+.nav{display:flex;align-items:center;gap:12px;padding:10px 16px;background:linear-gradient(135deg,#16314f,#2a5a8c);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.3);position:sticky;top:0}
+.back{font-size:11px;background:rgba(255,255,255,.15);padding:6px 12px;border-radius:6px;color:#fff}
+.back:hover{background:rgba(255,255,255,.28)}
+.nav-title{font-size:14px;font-weight:bold;letter-spacing:1px}
+.sample-banner{background:#fff6df;border-bottom:1px solid #e6c976;color:#7a5c00;font-size:12px;text-align:center;padding:8px 12px;font-weight:bold}
+.wrap{max-width:900px;margin:20px auto;padding:0 16px}
+.title-block{text-align:center;margin-bottom:18px}
+.title-block h1{font-size:20px;letter-spacing:3px;color:#16314f}
+.title-block p{font-size:12px;color:#8a7a52;margin-top:4px}
+.step-card{background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:16px;overflow:hidden;display:flex;flex-wrap:wrap}
+.step-img{width:220px;min-height:160px;background:linear-gradient(135deg,#dfe7ee,#c7d3de);display:flex;align-items:center;justify-content:center;color:#8a9aaa;font-size:13px;flex-shrink:0}
+.step-body{flex:1;min-width:260px;padding:16px}
+.step-no{display:inline-block;background:#16314f;color:#d4af37;font-weight:900;font-size:13px;border-radius:6px;padding:2px 10px;margin-bottom:8px}
+.step-title{font-size:16px;font-weight:bold;margin-bottom:8px;color:#1a2332}
+.step-row{display:flex;gap:8px;margin-bottom:5px;font-size:13px}
+.step-label{flex-shrink:0;width:70px;color:#8a7a52;font-weight:bold}
+.step-val{color:#333}
+.print-btn-bar{text-align:right;margin-bottom:10px}
+.print-btn-bar button{padding:5px 14px;border-radius:4px;border:1px solid #16314f;background:#16314f;color:#fff;font-size:11px;cursor:pointer}
+.footer{text-align:center;padding:20px;font-size:11px;color:#a89568}
+@media print{.nav,.sample-banner,.print-btn-bar{display:none!important}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="back" href="../mikoshiya_is_demo.html">← MIKOSHIYA-iSへ戻る</a>
+  <span class="nav-title">作業要領書（サンプル）</span>
+</nav>
+<div class="sample-banner">📷 これはサンプル表示です。実際の導入時は貴社の作業手順写真・要素作業・急所・理由をそのまま登録できます。</div>
+
+<div class="wrap">
+  <div class="print-btn-bar"><button onclick="window.print()">🖨 印刷</button></div>
+  <div class="title-block">
+    <h1>一次加工作業要領書（サンプル）</h1>
+    <p>サンプル製品A ／ 全3ステップ（サンプル）</p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-img">📷 手順写真（サンプル）</div>
+    <div class="step-body">
+      <div class="step-no">STEP 1</div>
+      <div class="step-title">材料をセットする</div>
+      <div class="step-row"><div class="step-label">要素作業</div><div class="step-val">治具に材料を正しい向きでセットする</div></div>
+      <div class="step-row"><div class="step-label">急所</div><div class="step-val">向きを間違えると寸法不良の原因になる</div></div>
+      <div class="step-row"><div class="step-label">理由</div><div class="step-val">後工程での位置ズレを防止するため</div></div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-img">📷 手順写真（サンプル）</div>
+    <div class="step-body">
+      <div class="step-no">STEP 2</div>
+      <div class="step-title">加工を実施する</div>
+      <div class="step-row"><div class="step-label">要素作業</div><div class="step-val">設備を起動し規定条件で加工する</div></div>
+      <div class="step-row"><div class="step-label">急所</div><div class="step-val">条件表と実際の設定値を必ず照合する</div></div>
+      <div class="step-row"><div class="step-label">理由</div><div class="step-val">条件のズレは品質不良に直結するため</div></div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-img">📷 手順写真（サンプル）</div>
+    <div class="step-body">
+      <div class="step-no">STEP 3</div>
+      <div class="step-title">外観を確認し次工程へ渡す</div>
+      <div class="step-row"><div class="step-label">要素作業</div><div class="step-val">目視で外観確認後、専用パレットに置く</div></div>
+      <div class="step-row"><div class="step-label">急所</div><div class="step-val">キズ・変形がないか必ず確認する</div></div>
+      <div class="step-row"><div class="step-label">理由</div><div class="step-val">不良流出を防止するため</div></div>
+    </div>
+  </div>
+
+  <div class="footer">MIKOSHIYA-iS　サンプル帳票</div>
+</div>
+</body>
+</html>

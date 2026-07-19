@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>依頼書（サンプル）／ MIKOSHIYA-iS</title>
+<style>
+:root{--navy:#16314f;--gold:#d4af37;--bg-soft:#f4f6f9;--ok:#2e7d32;--pending:#9e9e9e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Yu Gothic","Hiragino Sans",sans-serif;background:#e9edf2;color:#222;font-size:14px}
+.wrap{max-width:900px;margin:0 auto;padding:0 0 40px}
+.nav{display:flex;align-items:center;gap:12px;padding:8px 16px;background:linear-gradient(135deg,#16314f,#2a5a8c);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.4);position:sticky;top:0}
+.back{font-size:12px;background:rgba(255,255,255,.15);padding:6px 12px;border-radius:6px;color:#fff}
+.back:hover{background:rgba(255,255,255,.28)}
+.sample-banner{background:#fff6df;border-bottom:1px solid #e6c976;color:#7a5c00;font-size:12px;text-align:center;padding:8px 12px;font-weight:bold}
+.title-bar{background:linear-gradient(120deg,#10213f 0%,var(--navy) 55%,#2d5ca8 100%);color:#fff;padding:18px 22px;margin:20px 16px 0;border-radius:8px;box-shadow:0 4px 14px rgba(31,56,100,.35);border-bottom:3px solid var(--gold)}
+.title-bar h1{font-size:20px;letter-spacing:.5px}
+.title-bar .sub{font-size:12px;opacity:.85;margin-top:4px}
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:#fff;border:1px solid #ccd5e0;border-radius:6px;padding:14px;margin:14px 16px}
+.meta-grid label{display:block;font-size:11px;color:#555;margin-bottom:3px}
+.meta-grid .val{font-size:13px;font-weight:bold;color:#222}
+.section{background:#fff;border:1px solid #ccd5e0;border-radius:6px;margin:0 16px 14px;overflow:hidden}
+.section-head{display:flex;align-items:center;justify-content:space-between;background:var(--bg-soft);padding:10px 14px;border-bottom:1px solid #ccd5e0}
+.section-head .left{display:flex;align-items:center;gap:10px}
+.roman{background:var(--navy);color:#fff;border-radius:4px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;flex-shrink:0}
+.section-head h2{font-size:15px}
+.status{font-size:11px;padding:3px 10px;border-radius:20px;color:#fff;font-weight:bold;white-space:nowrap}
+.status.pending{background:var(--pending)}
+.status.done{background:var(--ok)}
+.section-body{padding:12px 16px;font-size:12.5px;color:#555}
+@media print{.nav,.sample-banner{display:none!important}}
+</style>
+</head>
+<body>
+<nav class="nav"><a class="back" href="../mikoshiya_is_demo.html">← MIKOSHIYA-iSへ戻る</a></nav>
+<div class="sample-banner">🛠 これはサンプル表示です。回覧ルート・部署名・承認段階は貴社の運用フローに合わせて自由に設計します。</div>
+
+<div class="wrap">
+  <div class="title-bar">
+    <h1>工程変更依頼書（サンプル）</h1>
+    <div class="sub">SAMPLE-IRAI-001　／　発行日：2026-07-01</div>
+  </div>
+
+  <div class="meta-grid">
+    <div><label>依頼部署</label><div class="val">製造課（サンプル）</div></div>
+    <div><label>対象品番</label><div class="val">SAMPLE-000-01</div></div>
+    <div><label>依頼内容</label><div class="val">治具の一部変更</div></div>
+    <div><label>希望完了日</label><div class="val">2026-07-20</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="left"><div class="roman">Ⅰ</div><h2>発行部署</h2></div><span class="status done">完了</span></div>
+    <div class="section-body">依頼内容・変更理由を記載し、次部署へ回覧。</div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="left"><div class="roman">Ⅱ</div><h2>担当部署　確認</h2></div><span class="status done">完了</span></div>
+    <div class="section-body">実現可否・工数を確認し、品質管理へ回覧。</div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="left"><div class="roman">Ⅲ</div><h2>品質管理　承認</h2></div><span class="status pending">承認待ち</span></div>
+    <div class="section-body">品質への影響を確認中（現在ここで止まっています）。</div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="left"><div class="roman">Ⅳ</div><h2>製造　最終承認</h2></div><span class="status pending">未着手</span></div>
+    <div class="section-body">全部署の承認完了後、変更を反映。</div>
+  </div>
+</div>
+</body>
+</html>
