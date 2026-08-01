@@ -2,6 +2,12 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<script>
+  // ---- デモ用：入力・操作はそのままできますが、保存先をこのタブ限定（sessionStorage）にすることで、
+  // 他の訪問者や次回アクセス時にはデータが残らない（常に最初のサンプルに戻る）ようにしています ----
+  try{ Object.defineProperty(window, 'localStorage', { value: window.sessionStorage, configurable: true }); }catch(e){}
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>各工程の日程表｜生産管理-iS</title>
 <style>
