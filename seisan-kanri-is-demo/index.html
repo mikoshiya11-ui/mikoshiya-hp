@@ -72,6 +72,7 @@
   .btn.accent:hover{ filter:brightness(1.08); }
   .btn.ghost{ background:#f2f4f8; color:#3a4a63; }
   .btn.ghost:hover{ background:#e8ecf3; }
+  a.btn{ display:inline-block; text-decoration:none; }
 
   .linkRow{ display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; justify-content:center; }
   .linkRow a.zanpinLink{
@@ -356,29 +357,34 @@
         <button class="clearBtn" id="clearBtn" title="クリア">&times;</button>
       </div>
     </div>
-    <div class="btnRow">
+    <div class="btnRow" style="display:none;">
       <button class="btn primary" id="searchBtn">検索</button>
       <button class="btn accent" id="newBtn">＋ 新規作成</button>
       <button class="btn ghost" id="templateBtn">📋 ひな形から作成</button>
+    </div>
+    <div class="btnRow" style="flex-wrap:wrap;">
+      <a class="btn primary" href="作業票_モック.html" style="text-decoration:none;">作業票（部品表） →</a>
+      <a class="btn primary" href="個別日程表_モック.html?productNo=35481000-11" style="text-decoration:none;">個別日程表 →</a>
+      <a class="btn primary" href="NC日程表_モック.html" style="text-decoration:none;">NC日程表 →</a>
     </div>
     <div class="linkRow">
       <a class="zanpinLink" href="残品表_モック.html">工程別残品表 →</a>
       <a class="zanpinLink" href="支給納品一覧_モック.html">支給・納品一覧 →</a>
       <a class="zanpinLink" href="実績入力_モック.html">実績入力 →</a>
     </div>
-    <div class="quickLinks" id="quickLinks">
+    <div class="quickLinks" id="quickLinks" style="display:none;">
       <button data-filter="all" class="active">すべて</button>
       <button data-filter="inprogress">進行中案件</button>
       <button data-filter="done">完了案件(CSV出力)</button>
     </div>
-    <div class="quickLinks" id="dataTransferRow" style="margin-top:6px;">
+    <div class="quickLinks" id="dataTransferRow" style="margin-top:6px; display:none;">
       <button type="button" id="exportAllBtn" title="カードと、紐づく作業票・個別日程表のデータをまとめてJSONファイルに書き出します（別のパソコン・別のブラウザにデータを持っていく時に使います）">📤 データを書き出し（JSON）</button>
       <button type="button" id="importAllBtn" title="書き出したJSONファイルを読み込んで、今この画面にある案件と全部入れ替えます">📥 データを読み込み（JSON）</button>
       <input type="file" id="importFileInput" accept="application/json" style="display:none;">
     </div>
   </div>
 
-  <div class="resultsArea">
+  <div class="resultsArea" style="display:none;">
     <div class="resultsMetaRow">
       <div class="resultsMeta" id="resultsMeta"></div>
       <button type="button" id="exportCsvBtn" title="「完了（過去制作分）」になっている案件をまとめてCSVでダウンロード">📄 完了案件をCSV書き出し</button>
