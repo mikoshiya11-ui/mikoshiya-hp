@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会員証 — MIKOSHIYA</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    background: linear-gradient(180deg, #bfe0f2 0%, #d8ecda 55%, #aed69c 100%);
+    min-height: 100vh;
+    overflow-x: auto;
+  }
+
+  /* ===== ヘッダー（topbar座標系） ===== */
+  .topbar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    padding: 0 18px;
+    background: linear-gradient(180deg, #1c2c52, #0e1730);
+    border-bottom: 3px solid #d4af37;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .brand-wrap {
+    position: relative;
+    width: 160px;
+    height: 36px;
+  }
+  .header-frame {
+    position: absolute; left: 0; top: 0;
+    width: 160px; height: 36px;
+  }
+  .header-emblem {
+    position: absolute; left: -7px; top: 2px;
+    width: 32px; height: 32px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+  }
+  .brand-text {
+    position: absolute; left: 30px; right: 10px; top: 0; bottom: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #f3d97b;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    white-space: nowrap;
+  }
+  .topbar-actions { display: flex; align-items: center; gap: 8px; }
+  .btn-staffroom {
+    display: none;
+    font-size: 11px; font-weight: 700;
+    color: #16213e; text-decoration: none;
+    background: linear-gradient(180deg,#f6e27a,#d4af37);
+    padding: 6px 12px; border-radius: 20px;
+  }
+  .btn-logout {
+    position: relative;
+    width: 89px; height: 29px;
+    border: none; background: transparent; cursor: pointer;
+    padding: 0;
+  }
+  .btn-logout-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+  .btn-logout-text {
+    position: relative;
+    font-size: 11px; font-weight: 600;
+    color: #f3d97b;
+  }
+
+  .content { padding: 22px 16px 20px; }
+
+  /* ===== 会員証カード（main-card座標系: 404×555） ===== */
+  .main-card {
+    position: relative;
+    width: 404px;
+    height: 555px;
+    margin: 0 auto 18px;
+  }
+  .mc-frame {
+    position: absolute; left: 0; top: 0;
+    width: 404px; height: 555px;
+    filter: drop-shadow(0 10px 26px rgba(0,0,0,0.35));
+  }
+  .mc-ribbon {
+    position: absolute; left: 122px; top: 66px;
+    width: 155px; height: 32.5px;
+  }
+  .mc-emblem {
+    position: absolute; left: 155px; top: 84px;
+    width: 93px; height: 44.5px;
+  }
+  .mc-name {
+    position: absolute; left: 42px; top: 138px; width: 320px;
+    text-align: center;
+    font-size: 21px;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mc-id {
+    position: absolute; left: 42px; top: 167px; width: 320px;
+    text-align: center;
+    font-size: 12px;
+    color: #b9c6ea;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mc-plan-wrap {
+    position: absolute; left: 152px; top: 192px;
+    width: 100px; height: 23px;
+  }
+  .mc-plan-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+  .mc-plan-text {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 100%;
+    font-size: 10px; font-weight: 600;
+    color: #f3d97b;
+  }
+  .mc-qr-wrap {
+    position: absolute; left: 119px; top: 260px;
+    width: 166px; height: 166px;
+    z-index: 3;
+  }
+  .mc-qr-frame {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+  .mc-qr-code {
+    position: absolute; left: 31px; top: 31px;
+    width: 104px; height: 104px;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 4px;
+  }
+  .mc-qr-code canvas, .mc-qr-code img { width: 96px; height: 96px; }
+  .mc-gem-left {
+    position: absolute; left: -12px; top: 68px;
+    width: 20px; height: 30px;
+  }
+  .mc-gem-right {
+    position: absolute; right: -12px; top: 68px;
+    width: 20px; height: 30px;
+  }
+  .mc-footer {
+    position: absolute; left: 42px; top: 452px; width: 320px;
+    text-align: center;
+    font-size: 11px;
+    color: #ddc276;
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== 今月の利用状況（usage-panel座標系: 404×151） ===== */
+  .usage-panel {
+    position: relative;
+    width: 404px;
+    height: 151px;
+    margin: 0 auto 16px;
+  }
+  .up-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+  .up-header {
+    position: absolute; left: 102px; top: 14px;
+    width: 200px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .up-header-text {
+    font-size: 11px; font-weight: 800; color: #f3d97b; letter-spacing: 0.1em;
+  }
+  .up-stats {
+    position: absolute; left: 14px; top: 66px; width: 376px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .up-stat { text-align: center; }
+  .up-stat img { width: 24px; height: 24px; margin-bottom: 2px; }
+  .up-num { font-size: 19px; font-weight: 800; color: #3b2a06; }
+  .up-label { font-size: 10px; color: #8a744a; margin-top: 2px; }
+
+  /* ===== 冒険の記録（history-panel座標系: 幅404, 縦可変9スライス） ===== */
+  .history-panel {
+    position: relative;
+    width: 404px;
+    margin: 0 auto 100px;
+  }
+  .hp-top {
+    width: 100%; height: 45px;
+    background: url('assets/panel_adventure_log_top.png') no-repeat;
+    background-size: 100% 100%;
+  }
+  .hp-mid {
+    width: 100%;
+    min-height: 20px;
+    background: url('assets/panel_adventure_log_mid.png') repeat-y;
+    background-size: 100% 45px;
+  }
+  .hp-bottom {
+    width: 100%; height: 45.5px;
+    background: url('assets/panel_adventure_log_bottom.png') no-repeat;
+    background-size: 100% 100%;
+  }
+  .hp-content {
+    position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+    padding: 42px 24px 18px;
+  }
+  .hp-title {
+    text-align: center;
+    font-size: 12px; font-weight: 800; color: #f3d97b;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+  .visit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #d8c48f;
+    font-size: 14px;
+  }
+  .visit-item:last-child { border-bottom: none; }
+  .visit-date { color: #5c4a2a; font-weight: 600; }
+  .visit-time { font-size: 12px; color: #a1895a; }
+  .visit-fee { font-weight: 800; color: #7a5c1e; }
+  #visitList { color: #a1895a; font-size: 13px; text-align: center; padding: 4px 0; }
+
+  /* ===== 下部ナビ（bottom-nav座標系） ===== */
+  .nav-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 56px;
+    background-image: url('assets/navbar_background.png');
+    background-repeat: repeat-x;
+    background-size: 100px 56px;
+    background-position: bottom left;
+    padding-bottom: env(safe-area-inset-bottom);
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    box-shadow: 0 -4px 14px rgba(0,0,0,0.3);
+  }
+  .nav-center-gem {
+    position: absolute; left: 50%; top: 0;
+    width: 16px; height: 16px;
+    transform: translateX(-50%);
+  }
+  .nav-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 66px; height: 54px;
+    margin-top: 1px;
+    text-decoration: none;
+  }
+  .nav-btn-bg {
+    position: absolute; left: 50%; top: 50%;
+    width: 66px; height: 54px;
+    transform: translate(-50%, -50%);
+  }
+  .nav-icon {
+    position: relative;
+    width: 24px; height: 26px;
+    margin-bottom: 1px;
+  }
+  .nav-label {
+    position: relative;
+    font-size: 9px;
+    color: #9aa0ab;
+  }
+  .nav-item.active .nav-label { color: #f3d97b; }
+  .pb { padding-bottom: 90px; }
+
+  #loading-overlay {
+    position: fixed; inset: 0;
+    background: linear-gradient(180deg, #1c2c52, #0e1730);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: #f3d97b;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+<div id="loading-overlay">読み込み中...</div>
+
+<div id="app" style="display:none">
+  <header class="topbar">
+    <div class="brand-wrap">
+      <img class="header-frame" src="assets/header_brand_frame.png" alt="">
+      <img class="header-emblem" src="assets/header_emblem.png" alt="">
+      <div class="brand-text">MIKOSHIYA</div>
+    </div>
+    <div class="topbar-actions">
+      <a href="staff.html" id="btnStaffRoom" class="btn-staffroom">🏠 スタッフルーム</a>
+      <button class="btn-logout" id="btnLogout">
+        <img class="btn-logout-bg" src="assets/button_logout.png" alt="">
+        <span class="btn-logout-text">ログアウト</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="content">
+    <!-- 会員証 -->
+    <div class="main-card">
+      <img class="mc-frame" src="assets/frame_main_card.png" alt="">
+      <img class="mc-ribbon" src="assets/ribbon_member_card.png" alt="">
+      <img class="mc-emblem" src="assets/emblem_member_card.png" alt="">
+      <div class="mc-name" id="memberName">—</div>
+      <div class="mc-id" id="memberId">—</div>
+      <div class="mc-plan-wrap">
+        <img class="mc-plan-bg" src="assets/button_plan.png" alt="">
+        <div class="mc-plan-text" id="memberPlan">—</div>
+      </div>
+      <div class="mc-qr-wrap">
+        <img class="mc-qr-frame" src="assets/frame_qr.png" alt="">
+        <div class="mc-qr-code" id="qrCanvas"></div>
+        <img class="mc-gem-left" src="assets/decoration_qr_gem_left.png" alt="">
+        <img class="mc-gem-right" src="assets/decoration_qr_gem_right.png" alt="">
+      </div>
+      <div class="mc-footer">入退室時にスタッフへ提示</div>
+    </div>
+
+    <!-- 今月の利用状況 -->
+    <div class="usage-panel">
+      <img class="up-bg" src="assets/panel_usage_status.png" alt="">
+      <div class="up-header">
+        <img src="assets/header_usage_status.png" alt="" style="position:absolute; inset:0; width:100%; height:100%;">
+        <span class="up-header-text" style="position:relative;">✦ 今月の利用状況 ✦</span>
+      </div>
+      <div class="up-stats">
+        <div class="up-stat">
+          <img src="assets/icon_visit.png" alt="">
+          <div class="up-num" id="statVisits">—</div>
+          <div class="up-label">来訪回数</div>
+        </div>
+        <div class="up-stat">
+          <img src="assets/icon_time.png" alt="">
+          <div class="up-num" id="statHours">—</div>
+          <div class="up-label">利用時間(h)</div>
+        </div>
+        <div class="up-stat">
+          <img src="assets/icon_price.png" alt="">
+          <div class="up-num" id="statTotal">—</div>
+          <div class="up-label">合計(¥)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 冒険の記録 -->
+    <div class="history-panel">
+      <div class="hp-top"></div>
+      <div class="hp-mid" id="hpMid"></div>
+      <div class="hp-bottom"></div>
+      <div class="hp-content">
+        <div class="hp-title">冒険の記録</div>
+        <div id="visitList">データなし</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ナビ -->
+<nav class="nav-bar">
+  <img class="nav-center-gem" src="assets/decoration_nav_center.png" alt="">
+  <a href="member-card.html" class="nav-item active">
+    <img class="nav-btn-bg" src="assets/nav_button_active.png" alt="">
+    <img class="nav-icon" src="assets/icon_nav_member.png" alt="">
+    <span class="nav-label">会員証</span>
+  </a>
+  <a href="order.html" class="nav-item">
+    <img class="nav-btn-bg" src="assets/nav_button_inactive.png" alt="">
+    <img class="nav-icon" src="assets/icon_nav_order.png" alt="">
+    <span class="nav-label">注文</span>
+  </a>
+</nav>
+
+<script>
+const SUPABASE_URL = 'https://ashoqzwxgaovepclbawf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFzaG9xend4Z2FvdmVwY2xiYXdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU2OTk2MTMsImV4cCI6MjEwMTI3NTYxM30.Ke1Fa8MSTwj3OFH5mrh2ViPFCq4GUpYQh5vegyGbMLQ';
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// 会員名: 1行に収まるようフォントサイズを自動縮小（2行化・折り返しはしない）
+function fitOneLine(el, maxWidth, maxSize, minSize) {
+  let size = maxSize;
+  el.style.fontSize = size + 'px';
+  while (el.scrollWidth > maxWidth && size > minSize) {
+    size -= 1;
+    el.style.fontSize = size + 'px';
+  }
+}
+
+async function init() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { location.href = 'index.html'; return; }
+
+  const user = session.user;
+  const isLine = user.user_metadata?.provider === 'line';
+  const lineId = user.user_metadata?.sub;
+
+  // members テーブルから取得（LINEログインはline_id、それ以外はemailで照合）
+  const { data: member, error } = isLine
+    ? await sb.from('members').select('*').eq('line_id', lineId).maybeSingle()
+    : await sb.from('members').select('*').eq('email', user.email).maybeSingle();
+
+  document.getElementById('loading-overlay').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+
+  const nameEl = document.getElementById('memberName');
+
+  if (!member) {
+    // 未登録会員
+    nameEl.textContent = user.user_metadata?.name || user.user_metadata?.full_name || user.email || 'ゲスト';
+    fitOneLine(nameEl, 320, 21, 12);
+    document.getElementById('memberId').textContent = '（未登録 — スタッフへお声がけください）';
+    document.getElementById('memberPlan').textContent = '—';
+    // QRに識別子を入れる（LINEはlineId、それ以外はemail）
+    new QRCode(document.getElementById('qrCanvas'), { text: isLine ? (lineId || 'unknown') : user.email, width: 208, height: 208 });
+    return;
+  }
+
+  // 表示
+  nameEl.textContent = member.name || user.user_metadata?.full_name || user.user_metadata?.name || '—';
+  fitOneLine(nameEl, 320, 21, 12);
+  document.getElementById('memberId').textContent = member.id;
+  document.getElementById('memberPlan').textContent = member.plan === 'monthly' ? '月額プラン' : 'ドロップイン';
+
+  // スタッフ・オーナーは戻るボタンを表示
+  if (['スタッフ', 'オーナー'].includes(member.rank)) {
+    document.getElementById('btnStaffRoom').style.display = 'inline-block';
+  }
+
+  // QRコード生成（会員ID・2倍サイズで生成しCSSで104pxに縮小＝レティナ対応）
+  new QRCode(document.getElementById('qrCanvas'), { text: member.id, width: 208, height: 208 });
+
+  // 今月の来訪データ
+  const now = new Date();
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
+
+  const { data: visits } = await sb
+    .from('visits')
+    .select('*')
+    .eq('member_id', member.id)
+    .gte('date', monthStart)
+    .order('date', { ascending: false });
+
+  if (visits && visits.length > 0) {
+    const totalMinutes = visits.reduce((s, v) => s + (v.stay_minutes || 0), 0);
+    const totalYen = visits.reduce((s, v) => s + (v.total_yen || 0), 0);
+
+    document.getElementById('statVisits').textContent = visits.length;
+    document.getElementById('statHours').textContent = (totalMinutes / 60).toFixed(1);
+    document.getElementById('statTotal').textContent = totalYen.toLocaleString();
+
+    // 最近5件
+    document.getElementById('visitList').innerHTML = visits.slice(0, 5).map(v => `
+      <div class="visit-item">
+        <div>
+          <div class="visit-date">${v.date}</div>
+          <div class="visit-time">${v.enter_time?.slice(0,5) || '—'} 〜 ${v.exit_time?.slice(0,5) || '滞在中'}</div>
+        </div>
+        <div class="visit-fee">¥${v.total_yen.toLocaleString()}</div>
+      </div>
+    `).join('');
+  } else {
+    document.getElementById('statVisits').textContent = '0';
+    document.getElementById('statHours').textContent = '0';
+    document.getElementById('statTotal').textContent = '0';
+    document.getElementById('visitList').textContent = '今月の来訪はありません';
+  }
+}
+
+document.getElementById('btnLogout').addEventListener('click', async () => {
+  await sb.auth.signOut();
+  location.href = 'index.html';
+});
+
+init();
+</script>
+</body>
+</html>
