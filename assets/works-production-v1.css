@@ -70,3 +70,22 @@ html:not(.ppv1-js) .ppv1-media{height:70dvh;flex:none}
  .ppv1-js .ppv1-layer,.ppv1-js .ppv1-line,.ppv1-js .is-active .ppv1-line,.ppv1-js .is-active.is-closing .ppv1-line,.ppv1-js .is-active.is-closing .ppv1-end{transition:none}
  .ppv1-frame img,.is-active .ppv1-frame img,.is-active.ppv1-scene-3 img{transition:none;transform:none}
 }
+/* 締めのページ（WORKS 02・03 と同じ形）：見出し＋説明＋実績一覧へ戻る */
+.w1-final .ppv1-layer{align-items:center;justify-content:center;padding-inline:24px;text-align:center;color:#fff}
+.w1-final h2{margin:0;font-size:clamp(1.6rem,3.4vw,3rem);font-weight:900;line-height:1.35;letter-spacing:.03em;word-break:keep-all;overflow-wrap:anywhere}
+.w1-final h2 span{display:block}
+.w1-final h2 em{color:var(--gold);font-style:normal}
+.w1-final p{max-width:760px;margin:22px 0 0;color:#E6EDF6;line-height:1.85;letter-spacing:.06em;word-break:keep-all;overflow-wrap:anywhere}
+.w1-back{display:inline-flex;align-items:center;gap:18px;min-height:52px;margin-top:28px;padding:8px 26px;border:2px solid var(--gold);border-radius:4px;color:var(--gold);font-weight:700;text-decoration:none;transition:background .2s,color .2s}
+.w1-back:hover,.w1-back:focus-visible{background:var(--gold);color:var(--navy)}
+.ppv1-js .w1-final h2,.ppv1-js .w1-final p,.ppv1-js .w1-back{opacity:0;transition:opacity .3s ease}
+.ppv1-js .is-active.w1-final h2,.ppv1-js .is-active.w1-final p,.ppv1-js .is-active .w1-back{opacity:1;transition:opacity .8s ease .25s,background .2s,color .2s}
+@media(max-width:650px){
+ .w1-final .ppv1-layer{padding:74px 18px 44px}
+ .w1-final h2{font-size:clamp(1.3rem,6.2vw,1.7rem)}
+ .w1-final p{font-size:.92rem;line-height:1.75}
+ .w1-back{margin-top:20px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ppv1-js .w1-final h2,.ppv1-js .w1-final p,.ppv1-js .w1-back,.ppv1-js .is-active.w1-final h2,.ppv1-js .is-active.w1-final p,.ppv1-js .is-active .w1-back{transition:none}
+}
