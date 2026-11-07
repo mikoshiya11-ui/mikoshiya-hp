@@ -2,6 +2,9 @@
 .ab-inner{width:calc(100% - 48px);max-width:1320px;margin-inline:auto}
 .ab-hero{position:relative;isolation:isolate;overflow:hidden;background:var(--deep);border-bottom:1px solid var(--line)}
 .ab-hero-img{position:absolute;z-index:-2;top:0;right:0;display:block;width:72%;height:100%;max-width:none;object-fit:cover;object-position:100% 30%}
+/* HERO 動画：構図が静止画と違うため、左右を均等に切り、上は後方のテンチョーの頭を残す */
+.ab-hero-video{object-position:50% 20%;opacity:0;transition:opacity .4s ease}
+.ab-hero-video.is-on{opacity:1}
 .ab-hero:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,var(--deep) 38%,rgba(5,14,28,.92) 46%,rgba(5,14,28,0) 56%),linear-gradient(0deg,var(--deep) 0%,rgba(5,14,28,0) 12%)}
 .ab-hero-inner{padding:48px 0 44px}
 .ab-hero h1{display:flex;align-items:center;gap:20px;margin:16px 0 0;font-size:clamp(3rem,5.6vw,5rem);line-height:1;letter-spacing:.04em}
