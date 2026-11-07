@@ -37,14 +37,10 @@
 .ab-values h3{margin:8px 0 0;color:var(--gold);font-size:clamp(1rem,1.4vw,1.2rem);font-weight:800;line-height:1.35;word-break:keep-all;overflow-wrap:anywhere}
 .ab-value-no{margin-top:8px;color:#CBD7E6;font-size:.74rem;font-weight:700;letter-spacing:.08em}
 .ab-values p{margin:8px 0 0;color:#E6EDF6;font-size:.86rem;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere}
-.ab-strength{position:relative;isolation:isolate;overflow:hidden;margin-top:20px;padding:calc(38.5% + 12px) 28px 28px;border:1px solid rgba(151,190,225,.4);border-radius:8px;background:linear-gradient(135deg,#0D2747 0%,#071527 100%)}
-.ab-strength:before{content:"";position:absolute;z-index:-1;top:0;left:0;right:0;aspect-ratio:2.6/1;background:url(about-strength-1400w.webp) 100% 8%/200% auto no-repeat;-webkit-mask-image:linear-gradient(0deg,transparent 0,#000 18%);mask-image:linear-gradient(0deg,transparent 0,#000 18%)}
-.ab-formula{margin:0;font-size:clamp(1.9rem,4.2vw,3.1rem);font-weight:900;line-height:1.2;letter-spacing:.04em}
-.ab-x{margin:0 .22em;color:var(--gold)}
-.ab-strength-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:22px 0 0;padding:0;list-style:none}
-.ab-strength-list h3{display:inline-flex;align-items:center;gap:8px;margin:0;padding:6px 16px 6px 10px;border-radius:999px;background:var(--gold);color:var(--deep);font-size:1.02rem;font-weight:900;line-height:1.3;white-space:nowrap}
-.ab-strength-list svg{flex:none;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.ab-strength-list p{margin:10px 0 0;color:#E6EDF6;font-size:.92rem;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
+.ab-strength-img{display:block;width:100%;height:auto;margin-top:20px;border:1px solid rgba(151,190,225,.4);border-radius:8px}
+/* スマホ・タブレットは画像内の文字が小さいので、同じ 3 項目を文字でも出す */
+.ab-strength-sp{display:none}
+@media(max-width:1023px){.ab-strength-sp{display:grid;gap:14px;margin:16px 0 0;padding:0;list-style:none}.ab-strength-sp h3{display:inline-flex;align-items:center;gap:8px;margin:0;padding:5px 14px 5px 10px;border-radius:999px;background:var(--gold);color:var(--deep);font-size:.95rem;font-weight:900;line-height:1.3}.ab-strength-sp svg{flex:none;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.ab-strength-sp p{margin:8px 0 0;color:#E6EDF6;font-size:.9rem;line-height:1.6}}
 .ab-profile{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:32px;margin-top:20px}
 .ab-company-img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:48% 50%;border:1px solid rgba(151,190,225,.4);border-radius:8px}
 .ab-note{margin:12px 0 0;color:var(--slate);font-size:.76rem;line-height:1.6}
@@ -65,11 +61,6 @@
 .ab-contact:hover,.ab-contact:focus-visible{background:#fff;color:var(--deep)}
 @media(min-width:1024px){
  .about-v2 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg.webp) center bottom/cover no-repeat #050D1A}
-}
-@media(min-width:1400px){
- .ab-strength{padding:24px 28px 28px}
- .ab-strength:before{left:auto;bottom:0;aspect-ratio:1.5/1;background:url(about-strength-1400w.webp) right center/auto 100% no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%);mask-image:linear-gradient(90deg,transparent 0,#000 12%)}
- .ab-strength-list{grid-template-columns:minmax(0,1fr);gap:14px}
 }
 /* 最下部の疾走演出。読み込みは final-run.js から。画像の文字の下側を横切り、ボタンより後ろ */
 .ab-run{display:none}
@@ -93,10 +84,6 @@
  .ab-values li:last-child{padding-right:12px}
  .ab-values svg{width:40px;height:40px}
  .ab-values p{font-size:.78rem}
- .ab-strength{padding-inline:20px;padding-bottom:20px}
- .ab-strength-list{gap:14px}
- .ab-strength-list h3{font-size:.92rem;padding-right:12px}
- .ab-strength-list p{font-size:.85rem}
  .ab-intro,.ab-profile{gap:20px}
  .ab-table th,.ab-table td{padding:9px 10px;font-size:.86rem}
 }
@@ -125,9 +112,6 @@
  .ab-head:before{width:32px}
  .ab-head:after{display:none}
  .ab-head span{order:0;width:100%}
- .ab-strength{padding:calc(50% + 10px) 18px 22px}
- .ab-strength:before{aspect-ratio:2/1}
- .ab-strength-list{grid-template-columns:minmax(0,1fr);gap:16px}
  .ab-table th,.ab-table td{display:block;width:100%;border:0}
  .ab-table tr:first-child th,.ab-table tr:first-child td{border:0}
  .ab-table th{padding:7px 12px}
@@ -144,6 +128,5 @@
  .ab-catch{font-size:1.3rem}
  .ab-message{font-size:1.2rem}
  .ab-values{grid-template-columns:minmax(0,1fr)}
- .ab-formula{font-size:1.65rem}
 }
 @media(prefers-reduced-motion:reduce){.ab-contact{transition:none}}
