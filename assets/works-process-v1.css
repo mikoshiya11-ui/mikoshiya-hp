@@ -1,0 +1,114 @@
+/* WORKS 02 工程・進捗OS（works-process-os.html だけが読む）。土台は works-production-v1.css を共用し、ここは差分だけ
+   文章は見出し＋本文。SCENE 02・03 は「作業票→個別日程表」の連携を画像の上に重ねて見せる */
+.works-process-v1 .ppv1-copy{height:auto;min-height:150px;flex-direction:column;padding:12px 0 26px}
+.w2-h{margin:0;font-size:clamp(1.25rem,2vw,1.8rem);font-weight:800;line-height:1.4;letter-spacing:.03em;word-break:keep-all;overflow-wrap:anywhere}
+.w2-b{max-width:900px;margin:8px 0 0;color:#E6EDF6;font-size:clamp(.86rem,1.05vw,.98rem);line-height:1.7;word-break:auto-phrase;line-break:strict;overflow-wrap:anywhere}
+.w2-b strong{color:#fff;font-weight:700}
+.ppv1-js .w2-h,.ppv1-js .w2-b{opacity:0;transition:opacity .3s ease}
+.ppv1-js .is-active .w2-h,.ppv1-js .is-active .w2-b{opacity:1;transition:opacity .8s ease .25s}
+.ppv1-scene-1 .ppv1-frame{--ar:1.912}
+.ppv1-scene-2 .ppv1-frame{--ar:2.012}
+.ppv1-scene-3 .ppv1-frame{--ar:1.964}
+.ppv1-scene-4 .ppv1-frame{--ar:1.653}
+.ppv1-scene-5 .ppv1-frame{--ar:1.668}
+.ppv1-scene-6 .ppv1-frame{--ar:1.333}
+/* 連携の帯：SCENE 02 と 03 で同じ位置に置き、線が左から右へ伸びる */
+.w2-link{flex:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 20px;padding:0 0 14px}
+.w2-flow{display:flex;align-items:center;gap:10px;min-width:0}
+.w2-node{flex:none;padding:6px 14px;border:1px solid rgba(151,190,225,.5);border-radius:4px;color:#CBD7E6;font-size:.9rem;font-weight:700;line-height:1.3;white-space:nowrap}
+.w2-node.is-on{border-color:var(--gold);background:var(--gold);color:var(--navy)}
+.w2-line{position:relative;display:flex;align-items:center;justify-content:center;width:clamp(180px,24vw,300px);height:30px;color:#fff;font-size:.82rem;font-weight:700;white-space:nowrap}
+.w2-line:before,.w2-line:after{content:"";position:absolute;left:0;bottom:1px;height:3px;border-radius:3px}
+.w2-line:before{right:0;background:rgba(151,190,225,.35)}
+.w2-line:after{width:100%;background:var(--gold);transform-origin:left center}
+.ppv1-scene-2 .w2-line:after{transform:scaleX(.5)}
+.ppv1-scene-3 .w2-line:after{transform:scaleX(1)}
+.ppv1-js .ppv1-scene-2 .w2-line:after{transform:scaleX(0);transition:transform 0s .6s}
+.ppv1-js .is-active.ppv1-scene-2 .w2-line:after{transform:scaleX(.5);transition:transform 1.4s ease .5s}
+.ppv1-js .ppv1-scene-3 .w2-line:after{transform:scaleX(.5);transition:transform 0s .6s}
+.ppv1-js .is-active.ppv1-scene-3 .w2-line:after{transform:scaleX(1);transition:transform 1.2s ease .4s}
+.w2-note{margin:0;color:var(--gold);font-size:.9rem;font-weight:700;line-height:1.4;word-break:keep-all;overflow-wrap:anywhere}
+/* 画像の上に重ねる部品。位置は画像に対する % なので、どの幅でも同じ場所を指す */
+.w2-canvas{position:absolute;inset:0}
+.w2-canvas>img{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:fill}
+.ppv1-frame .w2-canvas>img,.is-active .ppv1-frame .w2-canvas>img{transform:none;transition:none}
+/* WORKS 01 の寄り・縦スクロールの動きは使わない（重ねた部品と画像の位置がずれるため） */
+.ppv1-frame .w2-from img,.is-active .ppv1-frame .w2-from img,.works-process-v1 .ppv1-frame img,.works-process-v1 .is-active .ppv1-frame img{transform:none;transition:none}
+.w2-hit{position:absolute;border:3px solid var(--gold);border-radius:4px;box-shadow:0 0 0 2px rgba(5,14,28,.25),0 0 18px rgba(255,209,42,.75);pointer-events:none}
+.w2-tag{position:absolute;padding:3px 10px;border-radius:3px;background:var(--gold);color:var(--navy);font-size:clamp(.68rem,.95vw,.86rem);font-weight:800;line-height:1.35;white-space:nowrap;box-shadow:0 2px 8px rgba(5,14,28,.35)}
+.w2-from{position:absolute;display:flex;align-items:center;overflow:hidden;border:2px solid var(--gold);border-radius:4px;background:#fff;box-shadow:0 6px 18px rgba(5,14,28,.4)}
+.w2-from b{flex:none;align-self:stretch;display:flex;align-items:center;padding:0 8px;background:var(--gold);color:var(--navy);font-size:clamp(.62rem,.85vw,.8rem);font-weight:800;white-space:nowrap}
+.w2-from img{display:block;flex:1;min-width:0;width:0;height:auto;max-width:none}
+.w2-arrow{position:absolute;width:0;border-left:3px solid var(--gold);filter:drop-shadow(0 0 3px rgba(5,14,28,.6))}
+.w2-arrow:after{content:"";position:absolute;left:-8px;bottom:-1px;border:6.500px solid transparent;border-top:10px solid var(--gold);border-bottom:0}
+.w2-s2-row{left:8.800%;top:69.200%;width:82.800%;height:6.600%}
+.w2-s2-btn{left:17.600%;top:45%;width:10.600%;height:5%}
+.w2-s2-open{left:80.800%;top:9%;width:10.600%;height:5%}
+.w2-s2-tag{right:8.400%;top:62.400%}
+.w2-s3-row{left:6%;top:74%;width:90.400%;height:11%}
+.w2-s3-from{left:17.400%;top:52.800%;width:78.800%}
+.w2-s3-arrow{left:62%;top:60.600%;height:12.800%}
+.w2-s3-tag{right:3.600%;top:47.400%}
+/* 順番に出す：作業票の行 → 矢印 → 日程表の行 */
+.ppv1-js .w2-fx{opacity:0;transition:opacity .2s ease}
+.ppv1-js .is-active .w2-fx{opacity:1;transition:opacity .6s ease var(--d,.4s)}
+/* SCENE 0.5 と SCENE 01 の操作演出。画像の上に重ねるだけで、画像自体は変えない。位置は画像に対する % */
+.ppv1-scene-0 .ppv1-frame{--ar:1.7778}
+.ppv1-scene-0 .ppv1-copy{min-height:150px}
+.w2-row,.w2-press,.w2-tap,.w2-cursor{position:absolute;opacity:0;pointer-events:none}
+.w2-row{left:8.300%;top:60.750%;width:86%;height:5.650%;background:rgba(37,99,235,.1);box-shadow:inset 0 0 0 1px rgba(37,99,235,.45);transition:opacity .15s}
+.w2-press{left:76.070%;top:61.600%;width:11.250%;height:4%;border-radius:3px;background:rgba(11,46,111,.14);box-shadow:inset 0 0 0 2px #0B2E6F;transition:opacity .12s,background .1s,transform .1s}
+.w2-cursor{left:58%;top:36%;width:clamp(18px,1.9vw,26px);height:auto;fill:#fff;stroke:#111827;stroke-width:1.6;stroke-linejoin:round;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));transition:opacity .12s,left .85s cubic-bezier(.4,0,.2,1),top .85s cubic-bezier(.4,0,.2,1),transform .1s;transform-origin:15% 8%}
+.w2-tap{left:81.700%;top:63.600%;width:clamp(30px,5vw,46px);aspect-ratio:1;margin:calc(clamp(30px,5vw,46px) / -2) 0 0 calc(clamp(30px,5vw,46px) / -2);border:3px solid #1D4ED8;border-radius:50%;background:rgba(29,78,216,.18)}
+.op-see .w2-row,.op-hover .w2-row,.op-hover .w2-press,.op-cur .w2-cursor{opacity:1}
+.op-move .w2-cursor{left:81.700%;top:63.600%}
+.op-press .w2-press{background:rgba(11,46,111,.3);transform:scale(.97)}
+.op-press .w2-cursor{transform:scale(.88)}
+.op-tap .w2-tap{animation:w2tap .4s ease-out both}
+@keyframes w2tap{0%{opacity:.9;transform:scale(.45)}100%{opacity:0;transform:scale(1.25)}}
+/* まとめ */
+.w2-final .ppv1-layer{align-items:center;justify-content:center;padding-inline:24px;text-align:center}
+.w2-final h2{margin:0;font-size:clamp(1.6rem,3.4vw,3rem);font-weight:900;line-height:1.35;letter-spacing:.03em;word-break:keep-all;overflow-wrap:anywhere}
+.w2-final h2 em{color:var(--gold);font-style:normal}
+.w2-final p{max-width:760px;margin:22px 0 0;color:#E6EDF6;line-height:1.85;word-break:auto-phrase;line-break:strict;overflow-wrap:anywhere}
+.w2-back{display:inline-flex;align-items:center;gap:18px;min-height:52px;margin-top:28px;padding:8px 26px;border:2px solid var(--gold);border-radius:4px;color:var(--gold);font-weight:700;text-decoration:none;transition:background .2s,color .2s}
+.w2-back:hover,.w2-back:focus-visible{background:var(--gold);color:var(--navy)}
+html:not(.ppv1-js) .works-process-v1 .ppv1-media{height:60dvh}
+@media(max-width:1023px){
+ .w2-note{width:100%;text-align:center}
+}
+/* スマホ：横長の画面は要点が読める大きさで切り取る。連携の場面は重ねた部品ごと拡大する */
+@media(max-width:650px){
+ .works-process-v1 .ppv1-copy{min-height:0;padding:10px 18px 44px}
+ .w2-b{margin-top:6px;font-size:.82rem;line-height:1.6}
+ .w2-link{gap:4px 8px;padding:8px 10px 8px}
+ .w2-flow{gap:6px}
+ .w2-node{padding:4px 8px;font-size:.76rem}
+ .w2-line{width:112px;height:26px;font-size:.66rem}
+ .w2-note{font-size:.76rem}
+ /* SCENE 01 は重ねた部品ごと動かす：案件の行を見せてから、ボタンの位置へ送る */
+ .ppv1-scene-0 video{object-position:78% center}
+ .ppv1-scene-1 .ppv1-frame{--cw:calc(min(100cqh,60dvh)*1.912)}
+ .ppv1-scene-1 .w2-canvas{inset:0 auto 0 calc((100% - var(--cw))*.14);width:var(--cw);transition:left .7s ease-in-out}
+ .ppv1-scene-1.op-pan .w2-canvas{left:calc((100% - var(--cw))*.85)}
+ .ppv1-scene-4 img{object-position:0 100%}
+ .ppv1-scene-5 img{object-position:16% 60%}
+ .ppv1-scene-6 img{object-position:40% center}
+ .ppv1-scene-2 .ppv1-frame,.ppv1-scene-3 .ppv1-frame{--zm:1.41;--sx:31%;height:auto;aspect-ratio:calc(var(--ar) / var(--zm))}
+ .ppv1-scene-3 .ppv1-frame{--zm:1.35;--sx:6.75%}
+ .w2-canvas{inset:0 auto 0 calc(var(--sx) * -1);width:calc(var(--zm) * 100%)}
+ .w2-s2-btn,.w2-s2-open{display:none}
+ .w2-s2-tag{right:7.400%;top:59%}
+ .w2-s3-from{left:7%;width:68%}
+ .w2-s3-tag{left:7%;right:auto;top:43%}
+ .w2-s3-arrow{left:44%}
+ .w2-hit{border-width:2px}
+ .w2-final .ppv1-layer{padding:74px 18px 44px}
+ .w2-final p{font-size:.92rem;line-height:1.75}
+ .w2-back{margin-top:20px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ppv1-scene-0,.w2-row,.w2-press,.w2-tap,.w2-cursor{display:none}
+ .ppv1-scene-1 .w2-canvas{transition:none}
+ .ppv1-js .w2-h,.ppv1-js .w2-b,.ppv1-js .is-active .w2-h,.ppv1-js .is-active .w2-b,.ppv1-js .w2-fx,.ppv1-js .is-active .w2-fx,.ppv1-js .ppv1-scene-2 .w2-line:after,.ppv1-js .is-active.ppv1-scene-2 .w2-line:after,.ppv1-js .ppv1-scene-3 .w2-line:after,.ppv1-js .is-active.ppv1-scene-3 .w2-line:after,.w2-back{transition:none}
+}

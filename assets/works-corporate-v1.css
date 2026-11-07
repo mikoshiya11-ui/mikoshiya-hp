@@ -1,0 +1,54 @@
+/* WORKS 03 業務運営OS（works-corporate-os.html だけが読む・内部管理名はコーポレートサイト-OS）。土台は works-production-v1.css を共用し、ここは差分だけ
+   場面のクラスは w3-sN（WORKS 01 の場面ごとの動きを受けないため）。上の帯で「仕事の流れのどこを見ているか」を示す */
+.works-corporate-v1 .ppv1-copy{height:auto;min-height:150px;flex-direction:column;padding:12px 0 26px}
+.works-corporate-v1 .ppv1-frame img{transform:none;transition:none}
+.w2-h{margin:0;font-size:clamp(1.25rem,2vw,1.8rem);font-weight:800;line-height:1.4;letter-spacing:.03em;word-break:keep-all;overflow-wrap:anywhere}
+.w2-h em{color:var(--gold);font-style:normal}
+.w2-b{max-width:900px;margin:8px 0 0;color:#E6EDF6;font-size:clamp(.86rem,1.05vw,.98rem);line-height:1.7;word-break:auto-phrase;line-break:strict;overflow-wrap:anywhere}
+.ppv1-js .w2-h,.ppv1-js .w2-b{opacity:0;transition:opacity .3s ease}
+.ppv1-js .is-active .w2-h,.ppv1-js .is-active .w2-b{opacity:1;transition:opacity .8s ease .25s}
+.w3-s0 .ppv1-frame{--ar:1.7778}
+.w3-s1 .ppv1-frame{--ar:2.012}
+.w3-s2 .ppv1-frame{--ar:2.046}
+.w3-s3 .ppv1-frame{--ar:2.013}
+.w3-s4 .ppv1-frame{--ar:2.026}
+.w3-s5 .ppv1-frame{--ar:2.018}
+.w3-s6 .ppv1-frame{--ar:2.021}
+.w3-s7 .ppv1-frame{--ar:2.012}
+/* 仕事の流れの帯。全場面で同じ位置に置き、見ている場面だけ光らせる。まとめでは全部つながる */
+.w3-rail{display:none}
+.ppv1-js .w3-rail{position:fixed;z-index:2;top:12px;left:276px;right:0;display:flex;justify-content:center;align-items:center;gap:18px;margin:0;padding:0;list-style:none;pointer-events:none}
+.w3-rail li{position:relative;padding:3px 12px;border:1px solid rgba(151,190,225,.4);border-radius:4px;color:#A9B9CD;font-size:.8rem;font-weight:700;line-height:1.35;white-space:nowrap;transition:background .4s,border-color .4s,color .4s}
+.w3-rail li+li:before{content:"";position:absolute;right:100%;top:50%;width:19px;height:2px;background:rgba(151,190,225,.35);transition:background .4s}
+.w3-rail li.is-past{border-color:rgba(255,209,42,.55);color:#E9D58C}
+.w3-rail li.is-past:before,.w3-rail li.is-on:before{background:var(--gold)}
+.w3-rail li.is-on{border-color:var(--gold);background:var(--gold);color:var(--navy)}
+.ppv1-js .works-corporate-v1 .ppv1-layer{padding-top:50px}
+/* まとめ */
+.w3-final .ppv1-layer{align-items:center;justify-content:center;padding-inline:24px;text-align:center}
+.w3-final h2{margin:0;font-size:clamp(1.6rem,3.4vw,3rem);font-weight:900;line-height:1.35;letter-spacing:.03em;word-break:keep-all;overflow-wrap:anywhere}
+.w3-final p{max-width:760px;margin:22px 0 0;color:#E6EDF6;line-height:1.85;word-break:auto-phrase;line-break:strict;overflow-wrap:anywhere}
+.w2-back{display:inline-flex;align-items:center;gap:18px;min-height:52px;margin-top:28px;padding:8px 26px;border:2px solid var(--gold);border-radius:4px;color:var(--gold);font-weight:700;text-decoration:none;transition:background .2s,color .2s}
+.w2-back:hover,.w2-back:focus-visible{background:var(--gold);color:var(--navy)}
+html:not(.ppv1-js) .works-corporate-v1 .ppv1-media{height:60dvh}
+@media(max-width:1023px){
+ .ppv1-js .w3-rail{top:84px;left:0}
+ .ppv1-js .works-corporate-v1 .ppv1-layer{padding-top:122px}
+}
+/* スマホ：横長の画面は要点が読める大きさで切り取る */
+@media(max-width:650px){
+ .works-corporate-v1 .ppv1-copy{min-height:0;padding:10px 18px 44px}
+ .w2-b{margin-top:6px;font-size:.82rem;line-height:1.6}
+ .ppv1-js .w3-rail{top:72px;gap:6px}
+ .ppv1-js .works-corporate-v1 .ppv1-layer{padding-top:104px}
+ .w3-rail li{padding:2px 4px;font-size:.64rem}
+ .w3-rail li+li:before{width:7px}
+ .w3-s0 video{object-position:72% center}
+ .works-corporate-v1 .ppv1-frame img{object-position:38% center}
+ .w3-final .ppv1-layer{padding:104px 18px 44px}
+ .w3-final p{font-size:.92rem;line-height:1.75}
+ .w2-back{margin-top:20px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ppv1-js .w2-h,.ppv1-js .w2-b,.ppv1-js .is-active .w2-h,.ppv1-js .is-active .w2-b,.w2-back,.w3-rail li,.w3-rail li+li:before{transition:none}
+}

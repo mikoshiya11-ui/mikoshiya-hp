@@ -1,0 +1,102 @@
+/* WORKS 一覧 v2（works.html だけが読む）。左ナビは top-v1.css を共用し、背景だけ TOP と同じ画像にする
+   tv2-strength は TOP（top-v2.css）の「MIKOSHIYAの強み」と同じ部品 */
+.wl-inner{width:calc(100% - 48px);max-width:1320px;margin-inline:auto}
+.wl-hero{position:relative;isolation:isolate;overflow:hidden;background:var(--deep);border-bottom:1px solid var(--line)}
+.wl-hero-img{position:absolute;z-index:-2;top:0;right:0;display:block;width:74%;height:100%;max-width:none;object-fit:cover;object-position:50% 12%}
+.wl-hero:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,var(--deep) 26%,rgba(5,14,28,.85) 42%,rgba(5,14,28,0) 68%),linear-gradient(0deg,var(--deep) 0%,rgba(5,14,28,0) 22%)}
+.wl-hero-inner{padding:64px 0 56px}
+.wl-hero h1{display:flex;align-items:baseline;gap:20px;margin:18px 0 0;font-size:clamp(3rem,5.6vw,5rem);line-height:1;letter-spacing:.04em}
+.wl-hero h1 small{font-size:1.1rem;font-weight:600;letter-spacing:.1em}
+.wl-hero h1:before{content:"";align-self:center;width:56px;height:4px;background:var(--gold);flex:none}
+.wl-catch{margin:26px 0 0;font-size:clamp(1.3rem,2.1vw,1.9rem);font-weight:800;line-height:1.4;letter-spacing:.03em;word-break:keep-all;overflow-wrap:anywhere}
+.wl-catch em,.wl-message em{color:var(--gold);font-style:normal}
+.wl-lead{max-width:520px;margin:12px 0 0;color:#E6EDF6;line-height:1.8;word-break:keep-all;overflow-wrap:anywhere}
+.wl-note{margin:14px 0 0;color:var(--slate);font-size:.85rem}
+.wl-list{display:grid;gap:24px;margin-block:32px 0;padding:0;list-style:none}
+.wl-card{display:grid;grid-template-columns:minmax(0,56fr) minmax(0,44fr);overflow:hidden;border:1px solid rgba(151,190,225,.34);border-radius:8px;background:linear-gradient(135deg,#0D2747 0%,#071527 100%)}
+.wl-rev{grid-template-columns:minmax(0,44fr) minmax(0,56fr)}
+.wl-rev .wl-media{order:2}
+.wl-media{position:relative;display:block;min-height:320px;background:var(--navy)}
+.wl-media img{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover}
+.wl-body{display:flex;flex-direction:column;justify-content:center;padding:26px 32px}
+.wl-title{display:flex;align-items:baseline;gap:20px}
+.wl-title h2{margin:0;font-size:clamp(1.6rem,2.3vw,2.2rem);line-height:1.25;letter-spacing:.02em}
+.wl-num{flex:none;padding-bottom:6px;border-bottom:3px solid var(--gold);font-size:1.5rem;font-weight:800;letter-spacing:.06em}
+.wl-sub{margin:8px 0 0;color:#E6EDF6;font-size:1rem}
+.wl-chips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0 0;padding:0;list-style:none}
+.wl-chips li{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px 10px;border:1px solid rgba(151,190,225,.34);border-radius:6px;background:rgba(5,14,28,.45);text-align:center;font-size:.82rem;font-weight:600;line-height:1.35;word-break:keep-all;overflow-wrap:anywhere}
+.wl-chips svg{width:28px;height:28px;fill:none;stroke:#68D8FF;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.wl-btn,.wl-soon{display:flex;align-items:center;justify-content:center;gap:24px;width:min(100%,280px);min-height:52px;margin:20px auto 0;padding:8px 20px;border-radius:4px;font-weight:700}
+.wl-btn{border:2px solid var(--gold);color:var(--gold);text-decoration:none;transition:background .2s,color .2s}
+.wl-btn:hover,.wl-btn:focus-visible{background:var(--gold);color:var(--deep)}
+.wl-soon{border:1px solid rgba(151,190,225,.3);background:rgba(151,190,225,.12);color:var(--slate);letter-spacing:.08em}
+.tv2-strength{margin-block:32px 0}
+.tv2-strength-inner{padding:0 0 16px;border:1px solid rgba(151,190,225,.28);border-radius:4px}
+.tv2-strength-head{display:flex;align-items:center;gap:14px;padding:12px 24px 0}
+.tv2-strength-head:before{content:"";width:44px;height:3px;background:var(--gold);flex:none}
+.tv2-strength-head h2{margin:0;font-size:1.05rem;font-weight:800;letter-spacing:.04em;white-space:nowrap}
+.tv2-strength-head:after{content:"";order:1;flex:1;height:1px;background:rgba(255,209,42,.7)}
+.tv2-strength-head span{order:2;color:var(--slate);font-size:.72rem;letter-spacing:.14em;white-space:nowrap}
+.tv2-strength-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0;padding:0;list-style:none}
+.tv2-strength-list li{position:relative;overflow:hidden;padding:14px 24px 16px}
+.tv2-strength-list li+li{border-left:1px solid rgba(151,190,225,.22)}
+.tv2-strength-art{position:absolute;z-index:0;right:12px;top:8px;width:46%;max-width:220px;height:auto;color:#2F6DB8;opacity:.45}
+.tv2-strength-label,.tv2-strength-list h3,.tv2-strength-list li>p{position:relative;z-index:1}
+.tv2-strength-label{margin:0;color:var(--cyan);font-size:.76rem;font-weight:600;letter-spacing:.12em}
+.tv2-strength-label:after{content:"";display:block;width:26px;height:3px;margin-top:8px;background:var(--gold)}
+.tv2-strength-list h3{margin:10px 0 0;font-size:1.75rem;font-weight:900;line-height:1.25;letter-spacing:.02em}
+.tv2-strength-list li>p:last-child{margin:6px 0 0;color:#E6EDF6;font-size:.9rem;line-height:1.6}
+.wl-message{margin:40px 0;text-align:center;font-size:clamp(1.25rem,2.3vw,2rem);font-weight:800;line-height:1.5;letter-spacing:.03em}
+.wl-message>span{display:block}
+.wl-x{margin:0 .2em;color:var(--gold)}
+.wl-contact{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:24px;margin-bottom:64px;padding-right:24px;overflow:hidden;border:1px solid var(--gold);border-radius:6px}
+.wl-contact-tab{padding:20px 72px 20px 28px;background:var(--gold);color:var(--deep);clip-path:polygon(0 0,100% 0,calc(100% - 40px) 100%,0 100%)}
+.wl-contact-tab h2{margin:0;color:inherit;font-size:1.5rem;line-height:1.2;letter-spacing:.04em}
+.wl-contact-tab small{font-size:.85rem;font-weight:700}
+.wl-contact p{margin:0;text-align:center;font-size:clamp(1.02rem,1.6vw,1.35rem);font-weight:700;word-break:keep-all;overflow-wrap:anywhere}
+.wl-contact .wl-btn{width:200px;margin:0}
+@media(min-width:1024px){
+ .works-v2 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg.webp) center bottom/cover no-repeat #050D1A}
+}
+/* 左ナビを除いた幅が狭い間は、チップを 2 列にして文字を読める大きさに保つ */
+@media(min-width:1024px) and (max-width:1279px){
+ .wl-body{padding:22px 24px}
+ .wl-chips{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:1023px){
+ .wl-inner{width:calc(100% - 44px)}
+ .wl-hero-inner{padding:124px 0 44px}
+ .wl-hero-img{width:100%;object-position:60% top}
+ .wl-hero:before{background:linear-gradient(90deg,rgba(5,14,28,.9) 0%,rgba(5,14,28,.72) 50%,rgba(5,14,28,.28) 100%),linear-gradient(0deg,var(--deep) 0%,rgba(5,14,28,0) 26%)}
+ .wl-card,.wl-rev{grid-template-columns:minmax(0,1fr)}
+ .wl-rev .wl-media{order:0}
+ .wl-media{min-height:0;aspect-ratio:16/9}
+ .tv2-strength-list{grid-template-columns:1fr}
+ .tv2-strength-list li+li{border-left:0;border-top:1px solid rgba(151,190,225,.22)}
+ .tv2-strength-art{width:min(46%,220px)}
+ .wl-contact{grid-template-columns:minmax(0,1fr);gap:16px;padding:0 0 20px}
+ .wl-contact-tab{padding:16px 64px 16px 22px}
+ .wl-contact p{padding-inline:18px}
+ .wl-contact .wl-btn{margin-inline:auto}
+}
+@media(max-width:650px){
+ .wl-inner{width:calc(100% - 36px)}
+ .wl-hero-inner{padding:96px 0 36px}
+ .wl-hero-img{object-position:55% top}
+ .wl-hero h1{gap:14px}
+ .wl-hero h1:before{width:32px}
+ .wl-body{padding:22px 18px}
+ .wl-title{gap:14px}
+ .wl-chips{gap:8px}
+ .wl-chips li{padding:10px 2px 8px;font-size:.76rem}
+ .tv2-strength-head{flex-wrap:wrap;gap:10px;padding:12px 18px 0}
+ .tv2-strength-head:after{display:none}
+ .tv2-strength-list li{padding:14px 18px 16px}
+ .tv2-strength-list h3{font-size:1.45rem}
+ .tv2-strength-list h3,.tv2-strength-list li>p:last-child,.wl-message span{word-break:auto-phrase;line-break:strict}
+}
+@media(max-width:359px){
+ .wl-chips{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(prefers-reduced-motion:reduce){.wl-btn{transition:none}}
+#work-03 .wl-media img{object-position:center top}

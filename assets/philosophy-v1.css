@@ -1,0 +1,56 @@
+/* 私たちの想い — 1 画面＝1 シーンのブランドストーリー（philosophy.html だけが読む・左ナビは top-v1.css を共用）
+   素材と文章は同じ .pv1-layer に入れ、is-active だけで一緒に切り替える */
+html.pv1-snap{scroll-snap-type:y mandatory;scroll-padding-top:0}
+.pv1-title{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.pv1-scene{position:relative;height:100vh;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always}
+.pv1-layer{position:relative;height:100%;overflow:hidden;background:var(--deep)}
+.pv1-js .pv1-layer{position:fixed;z-index:0;inset:0;height:auto;opacity:0;pointer-events:none;transition:opacity .8s ease}
+.pv1-js .is-active .pv1-layer{z-index:1;opacity:1;pointer-events:auto}
+.philosophy-v1 .footer{position:relative;z-index:2;scroll-snap-align:end}
+.pv1-media{position:absolute;inset:0;background:var(--navy)}
+.pv1-media img,.pv1-media video{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover}
+.pv1-media:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,14,28,.86) 0%,rgba(5,14,28,.5) 20%,rgba(5,14,28,0) 42%)}
+.pv1-top .pv1-media:after{background:linear-gradient(180deg,rgba(5,14,28,.82) 0%,rgba(5,14,28,.45) 18%,rgba(5,14,28,0) 36%)}
+.pv1-center .pv1-media:after{background:linear-gradient(180deg,rgba(5,14,28,.84) 0%,rgba(5,14,28,.68) 28%,rgba(5,14,28,0) 46%)}
+.pv1-copy{position:absolute;z-index:1;left:4%;right:4%;bottom:7%}
+.pv1-top .pv1-copy{top:7%;bottom:auto}
+.pv1-center .pv1-copy{top:4%;text-align:center}
+.pv1-copy h2{margin:0;font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;font-size:clamp(1.6rem,2.7vw,2.6rem);font-weight:600;line-height:1.5;letter-spacing:.05em;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.7);word-break:keep-all;overflow-wrap:anywhere}
+.pv1-copy h2 span{display:block}
+.pv1-copy h2.pv1-long{font-size:clamp(1.4rem,2.3vw,2.2rem)}
+.pv1-copy em{color:var(--gold);font-style:normal}
+.pv1-closing{margin:20px 0 0;font-size:1.1rem;color:#E6EDF6;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.pv1-keywords{margin:16px 0 0;color:var(--gold);font-size:1rem;font-weight:700;letter-spacing:.06em;text-shadow:0 2px 10px rgba(0,0,0,.7);word-break:keep-all;overflow-wrap:anywhere}
+/* 前の文章は先に消し、新しい文章は画像の後からゆっくり出す */
+.pv1-js .pv1-copy>*{opacity:0;transition:opacity .25s ease}
+.pv1-js .is-active .pv1-copy>*{opacity:1;transition:opacity 1.2s ease .35s}
+.pv1-scene-2 img{object-position:85% center}
+.pv1-scene-3 img{object-position:40% center}
+.pv1-scene-4 img{object-position:37% center}
+.pv1-scene-5 img{object-position:37% center}
+@media(min-width:1024px){
+ .pv1-js .pv1-layer{left:276px}
+}
+/* スマホ・タブレットは上に画像、下に文章（文字を顔へ被せない） */
+@media(max-width:1023px){
+ .pv1-media{top:72px;bottom:auto;height:64%;inset-inline:0}
+ .pv1-media:after,.pv1-top .pv1-media:after,.pv1-center .pv1-media:after{background:linear-gradient(0deg,var(--deep) 0%,rgba(5,14,28,0) 22%)}
+ .pv1-copy,.pv1-top .pv1-copy{top:calc(72px + 64% + 8px);bottom:auto;left:22px;right:22px}
+ .pv1-scene-1 video{object-position:50% center}
+ .pv1-scene-2 img{object-position:78% center}
+ .pv1-scene-3 img{object-position:45% center}
+ .pv1-scene-4 img{object-position:55% center}
+ .pv1-scene-5 img{object-position:36% center}
+ .pv1-scene-6 img{object-position:49% center}
+}
+@media(max-width:650px){
+ .pv1-media{top:66px}
+ .pv1-copy,.pv1-top .pv1-copy{top:calc(66px + 64% + 4px);left:18px;right:18px}
+ .pv1-copy h2{font-size:clamp(1.2rem,6vw,1.9rem);letter-spacing:.02em}
+ .pv1-copy h2.pv1-long{font-size:clamp(1rem,5vw,1.6rem)}
+ .pv1-closing{margin-top:12px;font-size:.92rem}
+ .pv1-keywords{margin-top:10px;font-size:.82rem;letter-spacing:.02em}
+}
+@media(prefers-reduced-motion:reduce){
+ .pv1-js .pv1-layer,.pv1-js .pv1-copy>*,.pv1-js .is-active .pv1-copy>*{transition:none}
+}

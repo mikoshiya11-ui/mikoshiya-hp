@@ -1,0 +1,120 @@
+/* SERVICE v2（services.html だけが読む）。左ナビは top-v1.css を共用し、背景だけ WORKS 一覧と同じにする */
+.sv2-inner{width:calc(100% - 48px);max-width:1320px;margin-inline:auto}
+.sv2-hero{position:relative;isolation:isolate;overflow:hidden;background:var(--deep);border-bottom:1px solid var(--line)}
+.sv2-hero-img{position:absolute;z-index:-2;top:0;right:0;display:block;width:68%;height:100%;max-width:none;object-fit:cover;object-position:50% 30%}
+.sv2-hero:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,var(--deep) 32%,rgba(5,14,28,.82) 46%,rgba(5,14,28,0) 72%),linear-gradient(0deg,var(--deep) 0%,rgba(5,14,28,0) 18%)}
+.sv2-hero-inner{padding:52px 0 48px}
+.sv2-hero h1{display:flex;align-items:baseline;gap:20px;margin:18px 0 0;font-size:clamp(3rem,5.6vw,5rem);line-height:1;letter-spacing:.04em}
+.sv2-hero h1 small{font-size:1.1rem;font-weight:600;letter-spacing:.1em;white-space:nowrap}
+.sv2-hero h1:before{content:"";align-self:center;width:56px;height:4px;background:var(--gold);flex:none}
+.sv2-catch{margin:24px 0 0;font-size:clamp(1.8rem,3.1vw,2.8rem);font-weight:900;line-height:1.35;letter-spacing:.03em}
+.sv2-catch em{color:var(--gold);font-style:normal}
+.sv2-lead{margin:16px 0 0;color:#E6EDF6;line-height:1.85;word-break:keep-all;overflow-wrap:anywhere}
+.sv2-section{margin-top:40px}
+.sv2-head{display:flex;align-items:center;gap:16px}
+.sv2-head:before{content:"";flex:none;width:44px;height:4px;background:var(--gold)}
+.sv2-head h2{margin:0;font-size:clamp(1.3rem,2vw,1.75rem);font-weight:800;line-height:1.3;letter-spacing:.03em}
+.sv2-head:after{content:"";order:1;flex:1;height:1px;background:rgba(151,190,225,.4)}
+.sv2-head span{order:2;color:var(--slate);font-size:.76rem;letter-spacing:.14em;white-space:nowrap}
+.sv2-services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:20px 0 0;padding:0;list-style:none}
+.sv2-card{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px 16px;padding:22px 26px;border:1px solid rgba(151,190,225,.4);border-radius:8px;background:linear-gradient(135deg,#0D2747 0%,#071527 100%)}
+.sv2-card:before{content:"";position:absolute;z-index:-1;inset:-8px;background:url(hero-top-v2-960w.webp) 0 0/320% auto no-repeat;opacity:.5;filter:blur(3px);-webkit-mask-image:linear-gradient(90deg,transparent 25%,#000 100%);mask-image:linear-gradient(90deg,transparent 25%,#000 100%)}
+.sv2-card-title{grid-column:1/-1;display:flex;align-items:baseline;gap:14px}
+.sv2-num{flex:none;padding-bottom:4px;border-bottom:3px solid var(--gold);color:var(--gold);font-size:1.5rem;font-weight:800;line-height:1.1;letter-spacing:.04em}
+.sv2-card h3{margin:0;font-size:clamp(1.15rem,1.75vw,1.55rem);font-weight:800;line-height:1.3;letter-spacing:.02em;word-break:keep-all;overflow-wrap:anywhere}
+.sv2-card p{margin:0;color:#E6EDF6;font-size:.95rem;line-height:1.8;word-break:keep-all;overflow-wrap:anywhere}
+.sv2-card svg{width:116px;height:116px;fill:none;stroke:var(--cyan);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(104,216,255,.65))}
+.sv2-steps{--tip:16px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));margin:20px 0 0;padding:0;list-style:none}
+.sv2-steps li{--shape:polygon(0 0,calc(100% - var(--tip)) 0,100% 50%,calc(100% - var(--tip)) 100%,0 100%,var(--tip) 50%);position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:center;padding:16px 26px 18px 30px;background:rgba(104,190,240,.6);text-align:center;clip-path:var(--shape)}
+.sv2-steps li:before{content:"";position:absolute;z-index:-1;inset:1px;background:linear-gradient(160deg,#10325C 0%,#071527 100%);clip-path:var(--shape)}
+.sv2-steps li:after{content:"";position:absolute;top:50%;right:11px;width:8px;height:8px;border-top:2px solid #fff;border-right:2px solid #fff;transform:translateY(-50%) rotate(45deg)}
+.sv2-steps li+li{margin-left:-15px}
+.sv2-steps li:first-child{--shape:polygon(0 0,calc(100% - var(--tip)) 0,100% 50%,calc(100% - var(--tip)) 100%,0 100%);padding-left:16px}
+.sv2-steps li:last-child{--shape:polygon(0 0,100% 0,100% 100%,0 100%,var(--tip) 50%);padding-right:16px}
+.sv2-steps li:last-child:after{display:none}
+.sv2-steps svg{width:44px;height:44px;fill:none;stroke:var(--cyan);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sv2-step-no{margin-top:8px;color:var(--gold);font-size:.74rem;font-weight:700;letter-spacing:.08em;white-space:nowrap}
+.sv2-steps h3{margin:4px 0 0;font-size:1.1rem;font-weight:800;line-height:1.35;word-break:keep-all;overflow-wrap:anywhere}
+.sv2-steps p{margin:8px 0 0;color:#CBD7E6;font-size:.8rem;line-height:1.55;word-break:keep-all;overflow-wrap:anywhere}
+.sv2-work{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,3fr);align-items:center;gap:32px;margin-top:20px}
+.sv2-work-media{position:relative;isolation:isolate;display:block;aspect-ratio:2.9/1;overflow:hidden;border:1px solid rgba(151,190,225,.4);border-radius:8px;color:#fff;text-decoration:none;transition:border-color .2s}
+.sv2-work-media:hover,.sv2-work-media:focus-visible{border-color:var(--gold)}
+.sv2-work-media img{position:absolute;z-index:-2;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 28%}
+.sv2-work-media:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,rgba(5,14,28,.92) 0%,rgba(5,14,28,.7) 38%,rgba(5,14,28,0) 68%)}
+.sv2-work-label{position:absolute;left:28px;bottom:24px;display:grid;grid-template-columns:auto auto;align-items:baseline;gap:8px 14px;font-size:clamp(1.4rem,2.4vw,2.1rem);font-weight:800;line-height:1.25}
+.sv2-work-label b{font-weight:inherit}
+.sv2-work-num{padding-bottom:3px;border-bottom:3px solid var(--cyan)}
+.sv2-work-label small{grid-column:2;font-size:1rem;font-weight:600}
+.sv2-work-side p{margin:0;color:#E6EDF6;line-height:1.8;word-break:keep-all;overflow-wrap:anywhere}
+.sv2-btn{display:flex;align-items:center;justify-content:center;gap:24px;width:min(100%,240px);min-height:52px;margin-top:18px;padding:8px 20px;border:2px solid var(--gold);border-radius:4px;color:var(--gold);font-weight:700;text-decoration:none;transition:background .2s,color .2s}
+.sv2-btn:hover,.sv2-btn:focus-visible{background:var(--gold);color:var(--deep)}
+.sv2-contact{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:28px;margin-top:48px;padding-right:28px;overflow:hidden;border:2px solid var(--gold);border-radius:8px;background:linear-gradient(135deg,#0D2747 0%,#071527 100%)}
+.sv2-contact-tab{padding:28px 84px 28px 32px;background:var(--gold);color:var(--deep);clip-path:polygon(0 0,100% 0,calc(100% - 44px) 100%,0 100%)}
+.sv2-contact-tab h2{margin:0;color:inherit;font-size:1.9rem;font-weight:800;line-height:1.15;letter-spacing:.04em}
+.sv2-contact-tab small{font-size:.9rem;font-weight:700}
+.sv2-contact p{margin:0;text-align:center;font-size:clamp(1.05rem,1.75vw,1.5rem);font-weight:800;line-height:1.5;word-break:keep-all;overflow-wrap:anywhere}
+.sv2-btn-solid{width:220px;margin:0;background:var(--gold);color:var(--deep)}
+.sv2-btn-solid:hover,.sv2-btn-solid:focus-visible{background:transparent;color:var(--gold)}
+.sv2-wave{display:block;width:100%;height:90px;margin-top:20px;fill:none;stroke:var(--cyan);stroke-width:1.2;opacity:.45}
+.sv2-wave path{vector-effect:non-scaling-stroke}
+@media(min-width:1024px){
+ .service-v2 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg.webp) center bottom/cover no-repeat #050D1A}
+}
+/* 左ナビを除いた幅が狭い間は、文字を読める大きさに保って詰める */
+@media(min-width:1024px) and (max-width:1279px){
+ .sv2-card{padding:18px 20px}
+ .sv2-card svg{width:80px;height:80px}
+ .sv2-steps li{padding:14px 22px 14px 24px}
+ .sv2-steps li:first-child{padding-left:12px}
+ .sv2-steps li:last-child{padding-right:12px}
+ .sv2-steps svg{width:36px;height:36px}
+ .sv2-steps h3{font-size:.98rem}
+ .sv2-steps p{font-size:.75rem}
+ .sv2-work{gap:24px}
+ .sv2-contact{gap:18px;padding-right:18px}
+ .sv2-contact-tab{padding:24px 68px 24px 24px}
+ .sv2-contact-tab h2{font-size:1.55rem}
+ .sv2-btn-solid{width:170px;gap:14px}
+}
+@media(max-width:1023px){
+ .sv2-inner{width:calc(100% - 44px)}
+ .sv2-hero-inner{padding:124px 0 44px}
+ .sv2-hero-img{width:100%;object-position:60% top}
+ .sv2-hero:before{background:linear-gradient(90deg,rgba(5,14,28,.92) 0%,rgba(5,14,28,.76) 50%,rgba(5,14,28,.3) 100%),linear-gradient(0deg,var(--deep) 0%,rgba(5,14,28,0) 26%)}
+ .sv2-card{padding:20px}
+ .sv2-card svg{width:76px;height:76px}
+ .sv2-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+ .sv2-steps li,.sv2-steps li:first-child,.sv2-steps li:last-child{padding:16px 12px 18px;border:1px solid rgba(104,190,240,.6);border-radius:8px;background:linear-gradient(160deg,#10325C 0%,#071527 100%);clip-path:none}
+ .sv2-steps li+li{margin-left:0}
+ .sv2-steps li:before,.sv2-steps li:after{display:none}
+ .sv2-work{grid-template-columns:minmax(0,1fr);gap:20px}
+ .sv2-contact{grid-template-columns:minmax(0,1fr);gap:18px;padding:0 0 24px}
+ .sv2-contact-tab{padding:20px 72px 20px 24px}
+ .sv2-contact p{padding-inline:18px}
+ .sv2-btn-solid{margin-inline:auto}
+}
+@media(max-width:650px){
+ .sv2-inner{width:calc(100% - 36px)}
+ .sv2-hero-inner{padding:96px 0 36px}
+ .sv2-hero h1{gap:14px}
+ .sv2-hero h1:before{width:32px}
+ .sv2-head{flex-wrap:wrap;gap:8px 12px}
+ .sv2-head:before{width:32px}
+ .sv2-head:after{display:none}
+ .sv2-head span{order:0;width:100%}
+ .sv2-services{grid-template-columns:minmax(0,1fr)}
+ .sv2-card{padding:18px}
+ .sv2-card svg{width:68px;height:68px}
+ .sv2-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .sv2-work-media{aspect-ratio:16/9}
+ .sv2-work-media:before{background:linear-gradient(0deg,rgba(5,14,28,.92) 0%,rgba(5,14,28,.55) 42%,rgba(5,14,28,0) 72%)}
+ .sv2-work-label{left:18px;bottom:16px}
+ .sv2-btn{margin-inline:auto}
+ .sv2-work-side p{text-align:center}
+}
+@media(max-width:359px){
+ .sv2-hero h1{gap:10px;font-size:2.5rem}
+ .sv2-hero h1 small{font-size:.95rem}
+ .sv2-steps{grid-template-columns:minmax(0,1fr)}
+}
+@media(prefers-reduced-motion:reduce){.sv2-btn,.sv2-work-media{transition:none}}

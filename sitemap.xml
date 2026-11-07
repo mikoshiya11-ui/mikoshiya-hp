@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://mikoshiya11-ui.github.io/mikoshiya-hp/</loc>
-    <lastmod>2026-06-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+<url><loc>https://mikoshiya-dx.com/about.html</loc></url>
+<url><loc>https://mikoshiya-dx.com/company.html</loc></url>
+<url><loc>https://mikoshiya-dx.com/contact.html</loc></url>
+<url><loc>https://mikoshiya-dx.com/</loc></url>
+<url><loc>https://mikoshiya-dx.com/philosophy.html</loc></url>
+<url><loc>https://mikoshiya-dx.com/process.html</loc></url>
+<url><loc>https://mikoshiya-dx.com/security.html</loc></url>
+<url><loc>https://mikoshiya-dx.com/services.html</loc></url>
+<url><loc>https://mikoshiya-dx.com/works-corporate-os.html</loc></url>
+<url><loc>https://mikoshiya-dx.com/works-process-os.html</loc></url>
+<url><loc>https://mikoshiya-dx.com/works-production-os.html</loc></url>
+<url><loc>https://mikoshiya-dx.com/works.html</loc></url>
 </urlset>

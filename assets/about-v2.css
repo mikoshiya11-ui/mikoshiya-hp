@@ -1,0 +1,146 @@
+/* ABOUT v2（about.html だけが読む）。左ナビは top-v1.css を共用し、背景だけ SERVICE・SECURITY と同じにする */
+.ab-inner{width:calc(100% - 48px);max-width:1320px;margin-inline:auto}
+.ab-hero{position:relative;isolation:isolate;overflow:hidden;background:var(--deep);border-bottom:1px solid var(--line)}
+.ab-hero-img{position:absolute;z-index:-2;top:0;right:0;display:block;width:72%;height:100%;max-width:none;object-fit:cover;object-position:100% 30%}
+.ab-hero:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,var(--deep) 38%,rgba(5,14,28,.92) 46%,rgba(5,14,28,0) 56%),linear-gradient(0deg,var(--deep) 0%,rgba(5,14,28,0) 12%)}
+.ab-hero-inner{padding:48px 0 44px}
+.ab-hero h1{display:flex;align-items:center;gap:20px;margin:16px 0 0;font-size:clamp(3rem,5.6vw,5rem);line-height:1;letter-spacing:.04em}
+.ab-hero h1:before{content:"";width:56px;height:4px;background:var(--gold);flex:none}
+.ab-sub{margin:10px 0 0 76px;font-size:1rem;font-weight:600;letter-spacing:.1em}
+.ab-catch{margin:20px 0 0;font-size:clamp(1.55rem,2.6vw,2.5rem);font-weight:900;line-height:1.35;letter-spacing:.03em}
+.ab-catch em,.ab-message em{color:var(--gold);font-style:normal}
+.ab-lead{margin:14px 0 0;color:#E6EDF6;line-height:1.8;word-break:keep-all;overflow-wrap:anywhere}
+.ab-section{margin-top:40px}
+.ab-head{display:flex;align-items:center;gap:16px}
+.ab-head:before{content:"";flex:none;width:44px;height:4px;background:var(--gold)}
+.ab-head h2{margin:0;font-size:clamp(1.3rem,2vw,1.75rem);font-weight:800;line-height:1.3;letter-spacing:.03em}
+.ab-head:after{content:"";order:1;flex:1;height:1px;background:rgba(151,190,225,.4)}
+.ab-head span{order:2;color:var(--slate);font-size:.76rem;letter-spacing:.14em;white-space:nowrap}
+.ab-intro{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);align-items:center;gap:32px;margin-top:20px}
+.ab-intro-img{display:block;width:100%;height:100%;min-height:240px;max-width:none;object-fit:cover;object-position:45% 50%;border:1px solid rgba(151,190,225,.4);border-radius:8px}
+.ab-message{margin:0;font-size:clamp(1.3rem,2.1vw,1.9rem);font-weight:900;line-height:1.45;letter-spacing:.02em;word-break:keep-all;overflow-wrap:anywhere}
+.ab-intro-text{margin:14px 0 0;color:#E6EDF6;line-height:1.85;word-break:keep-all;overflow-wrap:anywhere}
+.ab-link{display:inline-flex;align-items:center;gap:12px;margin-top:14px;padding:8px 0;border-bottom:1px solid rgba(255,209,42,.5);color:var(--gold);font-weight:700;text-decoration:none}
+.ab-link:hover,.ab-link:focus-visible{border-bottom-color:var(--gold)}
+.ab-values{--tip:18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:20px 0 0;padding:0;list-style:none}
+.ab-values li{--shape:polygon(0 0,calc(100% - var(--tip)) 0,100% 50%,calc(100% - var(--tip)) 100%,0 100%,var(--tip) 50%);position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:center;padding:18px 30px 20px 34px;background:rgba(104,190,240,.6);text-align:center;clip-path:var(--shape)}
+.ab-values li:before{content:"";position:absolute;z-index:-1;inset:1px;background:linear-gradient(160deg,#10325C 0%,#071527 100%);clip-path:var(--shape)}
+.ab-values li:after{content:"";position:absolute;top:50%;right:12px;width:8px;height:8px;border-top:2px solid #fff;border-right:2px solid #fff;transform:translateY(-50%) rotate(45deg)}
+.ab-values li+li{margin-left:-17px}
+.ab-values li:first-child{--shape:polygon(0 0,calc(100% - var(--tip)) 0,100% 50%,calc(100% - var(--tip)) 100%,0 100%);padding-left:18px}
+.ab-values li:last-child{--shape:polygon(0 0,100% 0,100% 100%,0 100%,var(--tip) 50%);padding-right:18px}
+.ab-values li:last-child:after{display:none}
+.ab-values svg{width:52px;height:52px;fill:none;stroke:var(--cyan);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ab-values h3{margin:8px 0 0;color:var(--gold);font-size:clamp(1rem,1.4vw,1.2rem);font-weight:800;line-height:1.35;word-break:keep-all;overflow-wrap:anywhere}
+.ab-value-no{margin-top:8px;color:#CBD7E6;font-size:.74rem;font-weight:700;letter-spacing:.08em}
+.ab-values p{margin:8px 0 0;color:#E6EDF6;font-size:.86rem;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere}
+.ab-strength{position:relative;isolation:isolate;overflow:hidden;margin-top:20px;padding:calc(38.5% + 12px) 28px 28px;border:1px solid rgba(151,190,225,.4);border-radius:8px;background:linear-gradient(135deg,#0D2747 0%,#071527 100%)}
+.ab-strength:before{content:"";position:absolute;z-index:-1;top:0;left:0;right:0;aspect-ratio:2.6/1;background:url(about-strength-1400w.webp) 100% 8%/200% auto no-repeat;-webkit-mask-image:linear-gradient(0deg,transparent 0,#000 18%);mask-image:linear-gradient(0deg,transparent 0,#000 18%)}
+.ab-formula{margin:0;font-size:clamp(1.9rem,4.2vw,3.1rem);font-weight:900;line-height:1.2;letter-spacing:.04em}
+.ab-x{margin:0 .22em;color:var(--gold)}
+.ab-strength-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:22px 0 0;padding:0;list-style:none}
+.ab-strength-list h3{display:inline-flex;align-items:center;gap:8px;margin:0;padding:6px 16px 6px 10px;border-radius:999px;background:var(--gold);color:var(--deep);font-size:1.02rem;font-weight:900;line-height:1.3;white-space:nowrap}
+.ab-strength-list svg{flex:none;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ab-strength-list p{margin:10px 0 0;color:#E6EDF6;font-size:.92rem;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
+.ab-profile{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:32px;margin-top:20px}
+.ab-company-img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:48% 50%;border:1px solid rgba(151,190,225,.4);border-radius:8px}
+.ab-note{margin:12px 0 0;color:var(--slate);font-size:.76rem;line-height:1.6}
+.ab-table{width:100%;border-collapse:collapse}
+.ab-table th,.ab-table td{padding:11px 14px;border-bottom:1px solid rgba(151,190,225,.3);text-align:left;font-size:.94rem;line-height:1.6;vertical-align:top;overflow-wrap:anywhere}
+.ab-table tr:first-child th,.ab-table tr:first-child td{border-top:1px solid rgba(151,190,225,.3)}
+.ab-table th{width:7em;background:rgba(13,39,71,.65);font-weight:700;white-space:nowrap}
+.ab-table td{word-break:auto-phrase}
+.ab-table a{color:inherit}
+.ab-final{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;align-items:center;aspect-ratio:2097/750;margin-top:48px;padding:24px;text-align:center}
+/* 画像に同じ文字が入っているので、幅 651px 以上は HTML の文字を読み上げ用として画面から隠す */
+.ab-final-img{position:absolute;z-index:-2;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover}
+.ab-final h2,.ab-final-copy{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ab-final h2{margin:0;font-size:clamp(1.7rem,4.2vw,3.5rem);font-style:italic;font-weight:800;line-height:1.2;letter-spacing:.03em;text-shadow:0 2px 14px rgba(5,14,28,.75)}
+.ab-final h2:after{content:"";display:block;width:min(86%,620px);height:5px;margin:14px auto 0;border-radius:999px;background:var(--gold);transform:rotate(-1deg)}
+.ab-final-copy{margin:16px 0 0;font-size:clamp(1rem,1.7vw,1.35rem);font-weight:700;line-height:1.6;text-shadow:0 1px 10px rgba(5,14,28,.9)}
+.ab-contact{display:inline-flex;align-items:center;justify-content:center;gap:16px;width:min(100%,clamp(280px,32vw,460px));min-height:clamp(52px,5vw,72px);margin-top:auto;padding:12px 28px;border-radius:999px;background:var(--gold);color:var(--deep);font-size:clamp(1.1rem,1.8vw,1.45rem);font-weight:900;text-decoration:none;box-shadow:0 8px 28px rgba(5,14,28,.55);transition:background .2s,color .2s}
+.ab-contact:hover,.ab-contact:focus-visible{background:#fff;color:var(--deep)}
+@media(min-width:1024px){
+ .about-v2 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg.webp) center bottom/cover no-repeat #050D1A}
+}
+@media(min-width:1400px){
+ .ab-strength{padding:24px 28px 28px}
+ .ab-strength:before{left:auto;bottom:0;aspect-ratio:1.5/1;background:url(about-strength-1400w.webp) right center/auto 100% no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%);mask-image:linear-gradient(90deg,transparent 0,#000 12%)}
+ .ab-strength-list{grid-template-columns:minmax(0,1fr);gap:14px}
+}
+/* 最下部の疾走演出。読み込みは final-run.js から。画像の文字の下側を横切り、ボタンより後ろ */
+.ab-run{display:none}
+@media(min-width:1024px) and (prefers-reduced-motion:no-preference){
+ .ab-run{position:absolute;z-index:-1;left:0;bottom:0;display:block;width:auto;height:60%;max-width:none;aspect-ratio:640/324;visibility:hidden;pointer-events:none;will-change:transform}
+ .ab-run.is-running{visibility:visible}
+}
+/* 背景動画。静止画と同じ位置に重ね、絵が用意できてから出す。動画が使えないときは静止画のまま。読み込みは final-run.js から */
+.ab-final-bg{display:none}
+@media(prefers-reduced-motion:no-preference){
+ .ab-final-bg{position:absolute;z-index:-2;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover;opacity:0;pointer-events:none;transition:opacity .4s}
+ .ab-final-bg.is-on{opacity:1}
+}
+@media(max-width:650px) and (prefers-reduced-motion:no-preference){
+ .ab-final-bg{inset:auto auto 92px 50%;width:auto;height:300px;aspect-ratio:1120/400;transform:translateX(-50%);-webkit-mask-image:linear-gradient(180deg,transparent 34%,#000 37%);mask-image:linear-gradient(180deg,transparent 34%,#000 37%)}
+}
+/* 左ナビを除いた幅が狭い間は、文字を読める大きさに保って詰める */
+@media(min-width:1024px) and (max-width:1279px){
+ .ab-values li{padding:14px 24px 16px 26px}
+ .ab-values li:first-child{padding-left:12px}
+ .ab-values li:last-child{padding-right:12px}
+ .ab-values svg{width:40px;height:40px}
+ .ab-values p{font-size:.78rem}
+ .ab-strength{padding-inline:20px;padding-bottom:20px}
+ .ab-strength-list{gap:14px}
+ .ab-strength-list h3{font-size:.92rem;padding-right:12px}
+ .ab-strength-list p{font-size:.85rem}
+ .ab-intro,.ab-profile{gap:20px}
+ .ab-table th,.ab-table td{padding:9px 10px;font-size:.86rem}
+}
+@media(max-width:1023px){
+ .ab-inner{width:calc(100% - 44px)}
+ /* 全員が切れないよう、画像は文字の上へ帯として置く */
+ .ab-hero-inner{padding:calc(84px + 50vw) 0 40px}
+ .ab-hero-img{top:72px;width:100%;height:auto;aspect-ratio:2/1;-webkit-mask-image:linear-gradient(0deg,transparent 0,#000 14%);mask-image:linear-gradient(0deg,transparent 0,#000 14%)}
+ .ab-hero:before{display:none}
+ .ab-values{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .ab-values li,.ab-values li:first-child,.ab-values li:last-child{padding:16px 14px 18px;border:1px solid rgba(104,190,240,.6);border-radius:8px;background:linear-gradient(160deg,#10325C 0%,#071527 100%);clip-path:none}
+ .ab-values li+li{margin-left:0}
+ .ab-values li:before,.ab-values li:after{display:none}
+ .ab-intro,.ab-profile{grid-template-columns:minmax(0,1fr);gap:20px}
+ .ab-intro-img{height:auto;aspect-ratio:2/1;min-height:0}
+ .ab-company-img{height:auto;aspect-ratio:2/1}
+}
+@media(max-width:650px){
+ .ab-inner{width:calc(100% - 36px)}
+ .ab-hero-inner{padding:calc(78px + 50vw) 0 32px}
+ .ab-hero-img{top:66px}
+ .ab-hero h1{gap:14px}
+ .ab-hero h1:before{width:32px}
+ .ab-sub{margin-left:46px}
+ .ab-head{flex-wrap:wrap;gap:8px 12px}
+ .ab-head:before{width:32px}
+ .ab-head:after{display:none}
+ .ab-head span{order:0;width:100%}
+ .ab-strength{padding:calc(50% + 10px) 18px 22px}
+ .ab-strength:before{aspect-ratio:2/1}
+ .ab-strength-list{grid-template-columns:minmax(0,1fr);gap:16px}
+ .ab-table th,.ab-table td{display:block;width:100%;border:0}
+ .ab-table tr:first-child th,.ab-table tr:first-child td{border:0}
+ .ab-table th{padding:7px 12px}
+ .ab-table td{padding:8px 12px 12px}
+ /* スマホは画像の文字が小さくなるので HTML の文字を見せ、画像は人物の部分だけを見せる */
+ .ab-final h2,.ab-final-copy{position:static;width:auto;height:auto;overflow:visible;clip-path:none;white-space:normal}
+ .ab-final{aspect-ratio:auto;min-height:500px;padding:32px 18px 16px}
+ .ab-final-img{inset:auto auto 92px 50%;width:auto;height:300px;transform:translateX(-50%);-webkit-mask-image:linear-gradient(180deg,transparent 34%,#000 37%);mask-image:linear-gradient(180deg,transparent 34%,#000 37%)}
+ .ab-contact{min-height:64px;gap:10px;padding:10px 18px}
+}
+@media(max-width:359px){
+ .ab-hero h1{gap:10px;font-size:2.5rem}
+ .ab-sub{margin-left:42px;font-size:.9rem}
+ .ab-catch{font-size:1.3rem}
+ .ab-message{font-size:1.2rem}
+ .ab-values{grid-template-columns:minmax(0,1fr)}
+ .ab-formula{font-size:1.65rem}
+}
+@media(prefers-reduced-motion:reduce){.ab-contact{transition:none}}

@@ -1,0 +1,72 @@
+/* WORKS 01 生産管理OS — 1 画面＝1 シーンで実際の画面を見せる（works-production-os.html だけが読む・左ナビは top-v1.css を共用）
+   素材と文章は同じ .ppv1-layer に入れ、is-active だけで一緒に切り替える。文章は画面の外（下）に置き、UI を隠さない */
+html.ppv1-snap{scroll-snap-type:y mandatory;scroll-padding-top:0}
+.ppv1-title{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ppv1-scene{position:relative;height:100vh;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always}
+.ppv1-layer{position:relative;display:flex;flex-direction:column;height:100%;padding:24px 28px 0;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 50% 35%,#16365F 0%,var(--deep) 75%)}
+.ppv1-js .ppv1-layer{position:fixed;z-index:0;inset:0;height:auto;opacity:0;pointer-events:none;transition:opacity .6s ease}
+.ppv1-js .is-active .ppv1-layer{z-index:1;opacity:1;pointer-events:auto}
+.works-production-v1 .footer{position:relative;z-index:2;scroll-snap-align:end}
+.ppv1-media{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;container-type:size}
+.ppv1-frame{--ar:2;position:relative;overflow:hidden;width:100%;width:min(100cqw,calc(100cqh*var(--ar)));aspect-ratio:var(--ar);border-radius:8px;background:var(--navy);box-shadow:0 12px 36px rgba(0,0,0,.45)}
+.ppv1-scene-1 .ppv1-frame,.ppv1-scene-5 .ppv1-frame{--ar:1.7778}
+.ppv1-phone .ppv1-frame{--ar:.46;border-radius:14px}
+.ppv1-scene-7 .ppv1-frame{--ar:.49}
+.ppv1-frame img,.ppv1-frame video{display:block;width:100%;height:100%;max-width:none;object-fit:cover}
+/* ごく弱い寄り：抜ける画面は 0.6 秒そのまま保ち、フェードが終わってから元に戻す */
+.ppv1-frame img{transition:transform 0s .6s}
+.is-active .ppv1-frame img{transition:transform 3.6s cubic-bezier(.25,.6,.35,1)}
+.ppv1-scene-2 img{transform-origin:45% 40%}
+.ppv1-scene-3 img{transform-origin:50% 100%}
+.ppv1-scene-6 img{transform-origin:50% 45%}
+.ppv1-scene-8 img{transform-origin:75% 55%}
+.is-active.ppv1-scene-2 img,.is-active.ppv1-scene-6 img{transform:scale(1.025)}
+.is-active.ppv1-scene-3 img{transform:scale(1.04)}
+.is-active.ppv1-scene-8 img{transform:scale(1.03)}
+/* スマホ画面は縦長のまま：画像を枠より少し長くして、ゆっくり下へ */
+.ppv1-phone img{height:auto;object-fit:initial}
+.is-active.ppv1-scene-4 img{transform:translateY(-5.9%)}
+.is-active.ppv1-scene-7 img{transform:translateY(-5.6%)}
+.ppv1-copy{position:relative;flex:none;height:168px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff}
+.ppv1-copy em{color:var(--gold);font-style:normal}
+.ppv1-line{margin:0;font-size:clamp(1.1rem,1.7vw,1.5rem);font-weight:700;line-height:1.6;letter-spacing:.04em;word-break:keep-all;overflow-wrap:anywhere}
+.ppv1-end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;visibility:hidden}
+.ppv1-end h2{margin:0;font-size:clamp(1.25rem,2.4vw,2.1rem);line-height:1.45;letter-spacing:.04em;word-break:keep-all;overflow-wrap:anywhere}
+.ppv1-end h2 span{display:block}
+.ppv1-end p{margin:10px 0 0;color:#E6EDF6;font-size:.95rem;letter-spacing:.06em;word-break:keep-all;overflow-wrap:anywhere}
+.ppv1-js .ppv1-line{opacity:0;transition:opacity .3s ease}
+.ppv1-js .is-active .ppv1-line{opacity:1;transition:opacity .8s ease .25s}
+.ppv1-js .is-active.is-closing .ppv1-line{opacity:0;transition:opacity .4s ease}
+.ppv1-js .is-active.is-closing .ppv1-end{opacity:1;visibility:visible;transition:opacity 1s ease .3s}
+html:not(.ppv1-js) .ppv1-scene{height:auto;min-height:100dvh}
+html:not(.ppv1-js) .ppv1-end{position:static;opacity:1;visibility:visible;margin-top:12px}
+html:not(.ppv1-js) .ppv1-copy{height:auto;flex-direction:column;padding:16px 0 24px}
+html:not(.ppv1-js) .ppv1-media{height:70dvh;flex:none}
+@media(min-width:1024px){
+ .ppv1-js .ppv1-layer{left:276px}
+}
+@media(max-width:1023px){
+ .ppv1-layer{padding:88px 22px 0}
+}
+/* スマホ：横長の画面は無理に全体縮小せず、要点が読める大きさで切り取る */
+@media(max-width:650px){
+ .ppv1-layer{padding:74px 0 0}
+ .ppv1-copy{height:152px;padding:0 18px 40px}
+ .ppv1-end{bottom:40px}
+ .ppv1-line{font-size:clamp(1.02rem,4.6vw,1.2rem);letter-spacing:.02em}
+ .ppv1-end h2{font-size:clamp(1.12rem,5.5vw,1.36rem);letter-spacing:.02em}
+ .ppv1-end p{margin-top:8px;font-size:.8rem;letter-spacing:.02em}
+ .ppv1-frame{width:100%;height:min(100%,60dvh);aspect-ratio:auto;border-radius:0}
+ .ppv1-phone .ppv1-frame{width:min(100cqw,calc(100cqh*var(--ar)));height:auto;aspect-ratio:var(--ar);border-radius:12px}
+ .ppv1-scene-1 video{object-position:15% center}
+ .ppv1-scene-5 video{object-position:50% center}
+ .ppv1-scene-2 img{object-position:20% center}
+ .ppv1-scene-3 img{object-position:0 center;transition:object-position 0s .6s}
+ .is-active.ppv1-scene-3 img{transform:none;object-position:42% center;transition:object-position 3.6s ease-in-out}
+ .ppv1-scene-6 img{object-position:58% center}
+ .ppv1-scene-8 img{object-position:100% center;transform-origin:50% 50%}
+}
+@media(prefers-reduced-motion:reduce){
+ .ppv1-js .ppv1-layer,.ppv1-js .ppv1-line,.ppv1-js .is-active .ppv1-line,.ppv1-js .is-active.is-closing .ppv1-line,.ppv1-js .is-active.is-closing .ppv1-end{transition:none}
+ .ppv1-frame img,.is-active .ppv1-frame img,.is-active.ppv1-scene-3 img{transition:none;transform:none}
+}
