@@ -21,16 +21,19 @@
   const form = document.querySelector('#inquiry-form');
   const notice = document.querySelector('#form-notice');
   if (form && notice) {
+    const shownAt = Date.now();
     form.addEventListener('submit', event => {
       event.preventDefault();
-      if (location.hostname !== form.dataset.liveHost) {
+      if (!form.dataset.liveHost.split(' ').includes(location.hostname)) {
         notice.textContent = form.dataset.notice || '';
         return;
       }
       const button = form.querySelector('[type="submit"]');
       button.disabled = true;
       notice.textContent = '送信しています…';
-      fetch(form.dataset.endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
+      const body = new FormData(form);
+      body.append('elapsed', String(Date.now() - shownAt));
+      fetch(form.dataset.endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body })
         .then(res => { if (!res.ok) throw new Error('send failed'); return res.json(); })
         .then(data => {
           if (String(data.success) === 'false') throw new Error('send failed');
