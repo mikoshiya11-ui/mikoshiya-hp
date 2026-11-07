@@ -130,5 +130,8 @@
 /* HERO 動画（16:9）：画像と同じ 3:1 の枠の右側（画像の明るい部分と同じ位置）に収め、左端を背景へなじませる */
 .sec-hero-video{object-fit:contain;object-position:100% 50%;opacity:0;transition:opacity .4s ease;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 12%),linear-gradient(90deg,transparent 40.7%,#000 52%);mask-image:linear-gradient(180deg,transparent 0,#000 12%),linear-gradient(90deg,transparent 40.7%,#000 52%);-webkit-mask-composite:source-in;mask-composite:intersect}
 .sec-hero-video.is-on{opacity:1}
+/* 動画が出ている間は後ろの静止画を消す（人物の位置が違うため、動画の左端から透けて二重に見える） */
+.sec-hero img.sec-hero-img{transition:opacity .4s ease}
+.sec-hero.is-video img.sec-hero-img{opacity:0}
 @media(min-width:1720px){.sec-hero-video{-webkit-mask-image:linear-gradient(90deg,transparent 40.7%,#000 52%);mask-image:linear-gradient(90deg,transparent 40.7%,#000 52%)}}
 @media(max-width:650px){.sec-hero-video{-webkit-mask-image:linear-gradient(0deg,transparent 0,#000 16%),linear-gradient(90deg,transparent 40.7%,#000 52%);mask-image:linear-gradient(0deg,transparent 0,#000 16%),linear-gradient(90deg,transparent 40.7%,#000 52%)}}
