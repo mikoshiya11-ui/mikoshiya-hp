@@ -3,6 +3,8 @@
 .wl-inner{width:calc(100% - 48px);max-width:1320px;margin-inline:auto}
 .wl-hero{position:relative;isolation:isolate;overflow:hidden;background:var(--deep);border-bottom:1px solid var(--line)}
 .wl-hero-img{position:absolute;z-index:-2;top:0;right:0;display:block;width:74%;height:100%;max-width:none;object-fit:cover;object-position:50% 12%}
+.wl-hero-video{opacity:0;transition:opacity .4s ease}
+.wl-hero-video.is-on{opacity:1}
 .wl-hero:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,var(--deep) 26%,rgba(5,14,28,.85) 42%,rgba(5,14,28,0) 68%),linear-gradient(0deg,var(--deep) 0%,rgba(5,14,28,0) 22%)}
 .wl-hero-inner{padding:64px 0 56px}
 .wl-hero h1{display:flex;align-items:baseline;gap:20px;margin:18px 0 0;font-size:clamp(3rem,5.6vw,5rem);line-height:1;letter-spacing:.04em}
