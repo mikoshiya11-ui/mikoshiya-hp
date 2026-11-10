@@ -116,7 +116,7 @@
 }
 
 @media(max-width:1023px){
-  body.top-v2 .site-brand{flex:none;width:216px;min-width:0;height:54px;background:url(company-logo-v2-480w.webp) left center/contain no-repeat}
+  body.top-v2 .site-brand{flex:none;width:216px;min-width:0;height:54px;background:url(company-logo-v3-480w.webp) left center/contain no-repeat}
   body.top-v2 .site-brand img{display:none}
   .tv1-hero{min-height:720px;padding-top:72px}
   .tv2-approved-visual{object-position:58% center}
