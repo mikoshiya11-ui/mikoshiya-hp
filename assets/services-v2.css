@@ -60,7 +60,7 @@
 .sv2-wave{display:block;width:100%;height:90px;margin-top:20px;fill:none;stroke:var(--cyan);stroke-width:1.2;opacity:.45}
 .sv2-wave path{vector-effect:non-scaling-stroke}
 @media(min-width:1024px){
- .service-v2 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg-v2.webp) center bottom/cover no-repeat #050D1A}
+ .service-v2 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg-v3.webp) center bottom/cover no-repeat #050D1A}
 }
 /* 左ナビを除いた幅が狭い間は、文字を読める大きさに保って詰める */
 @media(min-width:1024px) and (max-width:1279px){

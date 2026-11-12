@@ -73,7 +73,7 @@
   html{scroll-padding-top:0}
   body.top-v2 .site-header,body.top-v2 .footer{display:none}
   body.top-v2 main{margin-left:250px;display:grid;grid-template-rows:57.667vh auto auto;grid-template-rows:57.667dvh auto auto}
-  .tv1-side{position:fixed;z-index:60;inset:0 auto 0 0;width:250px;display:flex;flex-direction:column;padding:68px 0 30px;overflow:hidden;background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.9) 45%,rgba(5,13,26,.74) 62%,rgba(5,13,26,.45) 76%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg-v2.webp) center bottom/cover no-repeat #050D1A;border-right:1px solid var(--line)}
+  .tv1-side{position:fixed;z-index:60;inset:0 auto 0 0;width:250px;display:flex;flex-direction:column;padding:68px 0 30px;overflow:hidden;background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.9) 45%,rgba(5,13,26,.74) 62%,rgba(5,13,26,.45) 76%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg-v3.webp) center bottom/cover no-repeat #050D1A;border-right:1px solid var(--line)}
   .tv1-side-brand{display:flex;align-items:center;min-height:56px;padding:0 14px}
   .tv1-side-brand img{width:222px;height:auto}
   .tv1-side-nav{margin-top:48px}

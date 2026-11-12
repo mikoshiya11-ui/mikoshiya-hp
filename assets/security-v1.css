@@ -64,7 +64,7 @@
 .sec-band:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--deep) 0%,rgba(5,14,28,.45) 55%,rgba(5,14,28,.7) 100%)}
 @media(min-width:1720px){.sec-hero-img{top:0;bottom:auto;-webkit-mask-image:none;mask-image:none}}
 @media(min-width:1024px){
- .security-v1 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg-v2.webp) center bottom/cover no-repeat #050D1A}
+ .security-v1 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg-v3.webp) center bottom/cover no-repeat #050D1A}
 }
 /* 左ナビを除いた幅が狭い間は、文字を読める大きさに保って詰める */
 @media(min-width:1024px) and (max-width:1279px){

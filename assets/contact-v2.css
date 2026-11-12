@@ -77,7 +77,7 @@
  .ct-final-img{aspect-ratio:3/1;object-fit:fill}
 }
 @media(min-width:1024px){
- .contact-v2 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg-v2.webp) center bottom/cover no-repeat #050D1A}
+ .contact-v2 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg-v3.webp) center bottom/cover no-repeat #050D1A}
  .ct-hero-img{top:0}
  .ct-hero-inner{padding-top:calc(12px + 40%)}
 }
