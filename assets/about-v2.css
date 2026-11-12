@@ -60,7 +60,7 @@
 .ab-contact{display:inline-flex;align-items:center;justify-content:center;gap:16px;width:min(100%,clamp(280px,32vw,460px));min-height:clamp(52px,5vw,72px);margin-top:auto;padding:12px 28px;border-radius:999px;background:var(--gold);color:var(--deep);font-size:clamp(1.1rem,1.8vw,1.45rem);font-weight:900;text-decoration:none;box-shadow:0 8px 28px rgba(5,14,28,.55);transition:background .2s,color .2s}
 .ab-contact:hover,.ab-contact:focus-visible{background:#fff;color:var(--deep)}
 @media(min-width:1024px){
- .about-v2 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg.webp) center bottom/cover no-repeat #050D1A}
+ .about-v2 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg-v2.webp) center bottom/cover no-repeat #050D1A}
 }
 /* 最下部の疾走演出。読み込みは final-run.js から。画像の文字の下側を横切り、ボタンより後ろ */
 .ab-run{display:none}

@@ -58,7 +58,7 @@
 .wl-contact p{margin:0;text-align:center;font-size:clamp(1.02rem,1.6vw,1.35rem);font-weight:700;word-break:keep-all;overflow-wrap:anywhere}
 .wl-contact .wl-btn{width:200px;margin:0}
 @media(min-width:1024px){
- .works-v2 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg.webp) center bottom/cover no-repeat #050D1A}
+ .works-v2 .tv1-side{background:linear-gradient(180deg,rgba(5,13,26,.94) 0%,rgba(5,13,26,.94) 55%,rgba(5,13,26,.86) 68%,rgba(5,13,26,.5) 78%,rgba(5,13,26,.45) 88%,rgba(5,13,26,.8) 100%),url(top-nav-bg-v2.webp) center bottom/cover no-repeat #050D1A}
 }
 /* 左ナビを除いた幅が狭い間は、チップを 2 列にして文字を読める大きさに保つ */
 @media(min-width:1024px) and (max-width:1279px){
