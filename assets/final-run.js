@@ -97,8 +97,8 @@
       started();
       run.classList.add('is-running');
       anim = run.animate([
-        { transform: 'translateX(' + -run.offsetWidth + 'px)' },
-        { transform: 'translateX(' + section.clientWidth + 'px)' }
+        { transform: 'translateX(' + section.clientWidth + 'px)' },
+        { transform: 'translateX(' + -run.offsetWidth + 'px)' }
       ], { duration: 9000, easing: 'linear' });
       anim.onfinish = function () {
         anim = null;
