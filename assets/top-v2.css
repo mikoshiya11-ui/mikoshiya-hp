@@ -7,7 +7,10 @@
 .tv1-hero:after{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(180deg,rgba(0,8,17,.1),transparent 62%,rgba(1,10,20,.22))}
 .tv1-hero-copy{position:relative;z-index:1;max-width:560px;padding:96px 0 40px 40px}
 .tv1-hero h1{margin:0;font-size:1rem;line-height:1}
-.tv1-hero h1 img{width:520px;height:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,.45))}
+.tv1-hero h1{width:fit-content}
+.tv1-hero h1 img{display:block;width:520px;height:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,.45))}
+.tv1-hero-tag{display:flex;align-items:center;gap:.7em;margin-top:18px;font-size:1.2rem;font-weight:700;line-height:1.4;letter-spacing:.14em;color:#fff;white-space:nowrap;text-shadow:0 2px 10px rgba(0,0,0,.8)}
+.tv1-hero-tag:before,.tv1-hero-tag:after{content:"";flex:1;height:2px;background:rgba(255,255,255,.75);box-shadow:0 1px 6px rgba(0,0,0,.6)}
 .tv1-lead{margin:24px 0 0;font-size:1.05rem;line-height:1.9;font-weight:600;letter-spacing:.04em;color:#E6EDF6;text-shadow:0 2px 12px rgba(0,0,0,.75)}
 .tv1-cta{display:inline-flex;align-items:center;justify-content:space-between;min-width:228px;margin-top:28px;padding:10px 22px;border:2px solid var(--gold);background:rgba(3,16,29,.48);box-shadow:0 0 0 1px rgba(255,209,42,.08) inset;color:var(--gold);font-weight:700;letter-spacing:.08em;text-decoration:none;transition:background .2s,color .2s}
 .tv1-cta:hover,.tv1-cta:focus-visible{background:var(--gold);color:var(--navy)}
@@ -110,13 +113,14 @@
   .tv1-side-foot p{margin-top:6px}
   .tv1-hero-copy{padding-top:52px}
   .tv1-hero h1 img{width:430px}
+  .tv1-hero-tag{margin-top:14px;font-size:1rem}
   .tv1-lead{font-size:.92rem;line-height:1.7}
   .tv1-cta{margin-top:14px}
   .tv1-works-head h2{font-size:1.65rem}
 }
 
 @media(max-width:1023px){
-  body.top-v2 .site-brand{flex:none;width:216px;min-width:0;height:54px;background:url(company-logo-v5-480w.webp) left center/contain no-repeat}
+  body.top-v2 .site-brand{flex:none;width:216px;min-width:0;height:54px;background:url(company-logo-v6-480w.webp) left center/contain no-repeat}
   body.top-v2 .site-brand img{display:none}
   .tv1-hero{min-height:720px;padding-top:72px}
   .tv2-approved-visual{object-position:58% center}
@@ -136,6 +140,7 @@
   .tv1-hero{min-height:640px;padding-top:66px}
   .tv1-hero-copy{padding:62px 18px 36px}
   .tv1-hero h1 img{width:260px}
+  .tv1-hero-tag{margin-top:9px;font-size:.66rem;letter-spacing:.08em;gap:.5em}
   .tv1-lead{font-size:.95rem;line-height:1.8}
   .tv1-works{padding:28px 0 46px}
   .tv1-works-inner{width:calc(100% - 36px)}
